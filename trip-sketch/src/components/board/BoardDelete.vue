@@ -26,7 +26,7 @@ export default {
 	methods: {
 		moveList() {
 			console.log("글목록 보러가자!!!");
-			this.$router.push({ path: "boardlist" });
+			this.$router.push({ path: "list" });
 		},
 	},
 };
