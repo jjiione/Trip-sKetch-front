@@ -1,12 +1,10 @@
 <template>
-	<div>
-		<h1 class="underline">도서 목록</h1>
-		<div style="text-align: right">
-			<button @click="movePage">도서 등록</button>
-		</div>
-		<div v-if="articles.length">
-			<table id="article-list">
-				<colgroup>
+	<div class="board_wrap">
+		<div class="board_title">
+			<h1 style="font-weight: bold;">공지사항</h1></div>
+		<div class="board_list_wrap" v-if="articles.length" >
+			<table class="board_list" id="article-list">
+				<colgroup >
 					<col style="width: 5%" />
 					<col style="width: 65%" />
 					<col style="width: 10%" />
@@ -14,30 +12,45 @@
 					<col style="width: 15%" />
 				</colgroup>
 				<thead>
-					<tr>
-						<th>글번호</th>
-						<th>도서 번호</th>
-						<th>제목</th>
-						<th>저자</th>
-						<th>가격</th>
+					<tr class="top">
+						<th class="num">번호</th>
+						<th class="title">제목</th>
+						<th class="writer">글쓴이</th>
+						<th class="date">작성일</th>
+						<th class="count">조회</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr v-for="(article, idx) in articles" :key="idx">
-						<td>{{ idx + 1 }}</td>
-						<td>
-							<router-link :to="{ name: 'articleview', params: { isbn: article.isbn } }">{{
+						<td class="num">{{ idx + 1 }}</td>
+						<td class="title">
+							<router-link :to="{ name: 'boardview', params: { isbn: article.isbn } }">{{
 								article.isbn
 							}}</router-link>
 						</td>
-						<td>{{ article.title }}</td>
-						<td>{{ article.author }}</td>
-						<td>{{ article.price | formatPrice }}</td>
+						<td class="writer">{{ article.title }}</td>
+						<td class="date">{{ article.author }}</td>
+						<td class="count">{{ article.price | formatPrice }}</td>
 					</tr>
 				</tbody>
 			</table>
+            <div class="board_page">
+                <a href="#" class="bt first">&lt;&lt;</a>
+                <a href="#" class="bt prev">&lt;</a>
+                <a href="#" class="num on">1</a>
+                <a href="#" class="num">2</a>
+                <a href="#" class="num">3</a>
+                <a href="#" class="num">4</a>
+                <a href="#" class="num">5</a>
+                <a href="#" class="bt next">></a>
+                <a href="#" class="bt last">>></a>
+            </div>
 		</div>
 		<div class="text-center" v-else>게시글이 없습니다.</div>
+            <div class="bt_wrap">
+			<button><a class="on" @click="movePage" >글 작성</a></button>
+                <!--<a href="#">수정</a>-->
+            </div>
 	</div>
 </template>
 
@@ -69,4 +82,6 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+
+</style>
