@@ -14,7 +14,7 @@ export default {
 <style>
 
 #main-night-gif {
-    height: 100vh;
+    height: 90vh;
     width: 100vw;
     opacity: 0.5;
 
