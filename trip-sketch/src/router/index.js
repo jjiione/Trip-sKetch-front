@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 // views
 import MainPage from "@/views/main/MainPage";
 import TheBoard from "@/views/BoardView.vue";
+import TheUser from "@/views/UserView.vue";
 
 // components
 import BoardList from "@/components/board/BoardList";
@@ -10,6 +11,8 @@ import BoardCreate from "@/components/board/BoardCreate";
 import BoardModify from "@/components/board/BoardModify";
 import BoardView from "@/components/board/BoardView";
 import BoardDelete from "@/components/board/BoardDelete";
+import UserLogin from "@/components/user/UserLogin";
+import UserLogout from "@/components/user/UserLogout";
 
 Vue.use(VueRouter);
 
@@ -49,6 +52,24 @@ const routes = [
 				path: "delete",
 				name: "boarddelete",
 				component: BoardDelete,
+			},
+		],
+	},
+	{
+		path: "/user",
+		name: "user",
+		component: TheUser,
+		redirect: "/user/login",
+		children: [
+			{
+				path: "login",
+				name: "userlogin",
+				component: UserLogin,
+			},
+			{
+				path: "logout",
+				name: "userlogout",
+				component: UserLogout,
 			},
 		],
 	},
