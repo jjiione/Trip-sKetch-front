@@ -1,7 +1,7 @@
 <template>
   <div class="button-7">
     <div class="eff-7"></div>
-    <a href="#"> Touch me </a>
+    <a href="#"> START </a>
   </div>
 </template>
 
@@ -24,7 +24,6 @@ export default {};
   margin: 0 0 40px 50px;
 }
 .button-7 a {
-  font-family: arial;
   font-size: 16px;
   color: azure;
   text-decoration: none;

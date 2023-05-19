@@ -1,19 +1,18 @@
 <template>
-  <div
-    class="col-md-4 col-sm-6 fh5co-tours animate-box fadeInUp animated"
-    data-animate-effect="fadeIn"
-  >
-    <div href="#">
-      <img
-        src="@/assets/testplace1.jpg"
-        style="width: 200px; height: 200px"
-        class="img-responsive"
-      />
-      <div class="desc">
-        <span></span>
-        <h3>New York</h3>
-        <span>3 nights + Flight 5*Hotel</span>
-        <span class="price">$1,000</span>
+  <div data-animate-effect="fadeIn">
+    <div href="#" class="col" style="text-align: center">
+      <div>
+        <img
+          src="@/assets/testplace1.jpg"
+          style="width: 200px; height: 200px"
+          class="img-responsive"
+        />
+      </div>
+
+      <div style="text-align: center; color: white; margin-top: 5px">
+        <div>장소 입력 예정</div>
+        <div>3nights + Flight 5*Hotel</div>
+        <div>$1,000</div>
         <a class="btn btn-primary btn-outline" href="#"
           >Book Now <i class="icon-arrow-right22"></i
         ></a>
