@@ -69,6 +69,4 @@ export default {
 	background: url("@/assets/login.jpg") top center;
 	text-align: center;
 }
-.logo-container {
-}
 </style>
