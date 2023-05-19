@@ -11,8 +11,9 @@ import BoardCreate from "@/components/board/BoardCreate";
 import BoardModify from "@/components/board/BoardModify";
 import BoardView from "@/components/board/BoardView";
 import BoardDelete from "@/components/board/BoardDelete";
-import UserLogin2 from "@/components/user/UserLogin2";
+import UserLogin from "@/components/user/UserLogin";
 import UserLogout from "@/components/user/UserLogout";
+import UserSignup from "@/components/user/UserSignup";
 
 Vue.use(VueRouter);
 
@@ -64,12 +65,17 @@ const routes = [
 			{
 				path: "login",
 				name: "userlogin",
-				component: UserLogin2,
+				component: UserLogin,
 			},
 			{
 				path: "logout",
 				name: "userlogout",
 				component: UserLogout,
+			},
+			{
+				path: "signup",
+				name: "usersignup",
+				component: UserSignup,
 			},
 		],
 	},
