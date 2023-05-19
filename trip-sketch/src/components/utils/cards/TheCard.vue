@@ -56,4 +56,43 @@ export default {
 	},
 };
 </script>
-<style></style>
+<style>
+.card {
+	border: 0;
+	border-radius: border-radius-small;
+	display: inline-block;
+	position: relative;
+	width: 100%;
+	margin-bottom: 30px;
+	box-shadow: 0px 5px 25px 0px rgba(0, 0, 0, 0.2);
+}
+.card-header {
+	background-color: transparent-bg;
+	border-bottom: 0;
+	background-color: transparent;
+	border-radius: 0;
+	padding: 0;
+}
+
+.card-footer {
+	padding: 0;
+	margin-top: 15px;
+	background-color: transparent-bg;
+	border: 0;
+}
+
+.card-plain {
+	background: transparent;
+	box-shadow: none;
+}
+.card-body,
+.card-header {
+	padding-left: 5px;
+	padding-right: 5px;
+}
+
+.card-header:after {
+	width: 100%;
+	left: 0;
+}
+</style>

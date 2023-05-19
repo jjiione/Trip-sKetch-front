@@ -3,7 +3,7 @@
 		<div class="page-header clear-filter" filter-color="orange">
 			<div class="page-header-image">
 				<div class="content">
-					<div class="container">
+					<div class="container" style="opcaticy: 1">
 						<div class="col-md-5 ml-auto mr-auto">
 							<the-card type="login" plain>
 								<div slot="header" class="logo-container">
@@ -64,8 +64,11 @@ export default {
 
 <style>
 .bg {
-	min-height: cover;
-	background: url("@/assets/login.jpg") center center no-repeat;
-	background-size: cover;
+	width: 100%;
+	height: 100vh;
+	background: url("@/assets/login.jpg") top center;
+	text-align: center;
+}
+.logo-container {
 }
 </style>
