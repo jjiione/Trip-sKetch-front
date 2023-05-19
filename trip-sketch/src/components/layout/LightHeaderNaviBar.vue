@@ -21,9 +21,9 @@
             </b-nav-item-dropdown>
           </b-navbar-nav>
 
-          <b-navbar-nav class="ml-auto">
+          <router-link :to="{ name: 'MainPage' }" style="color: gray">
             <img src="@/assets/daylogo.gif" style="width: 100px; width: 100px" />
-          </b-navbar-nav>
+          </router-link>
 
           <!-- Right aligned nav items -->
           <b-navbar-nav class="ml-auto">
