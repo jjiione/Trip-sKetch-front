@@ -1,18 +1,18 @@
 <template>
   <div>
-    <main-section-1></main-section-1>
-    <main-section-2></main-section-2>
+    <dark-main-section-1></dark-main-section-1>
+    <dark-main-section-2></dark-main-section-2>
   </div>
 </template>
 
 <script>
-import MainSection1 from "@/components/main/MainSection1.vue";
-import MainSection2 from "@/components/main/MainSection2.vue";
+import DarkMainSection1 from "@/components/main/DarkMainSection1.vue";
+import DarkMainSection2 from "@/components/main/DarkMainSection2.vue";
 export default {
   name: "MainPage",
   components: {
-    MainSection1,
-    MainSection2,
+    DarkMainSection1,
+    DarkMainSection2,
   },
 };
 </script>
