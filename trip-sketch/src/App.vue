@@ -1,18 +1,18 @@
 <template>
-	<div id="app">
-		<header-navi-bar />
-		<router-view />
-	</div>
+  <div id="app">
+    <dark-header-navi-bar />
+    <router-view />
+  </div>
 </template>
 
 <script>
-import HeaderNaviBar from "./components/layout/HeaderNaviBar.vue";
+import DarkHeaderNaviBar from "./components/layout/DarkHeaderNaviBar.vue";
 
 export default {
-	name: "App",
-	components: {
-		HeaderNaviBar,
-	},
+  name: "App",
+  components: {
+    DarkHeaderNaviBar,
+  },
 };
 </script>
 
