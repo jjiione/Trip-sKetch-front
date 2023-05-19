@@ -30,7 +30,7 @@
         text-align: center;
         text-align: center;
         position: absolute;
-        top: 45%;
+        top: 40%;
         left: 50%;
         transform: translate(-50%, -50%);
       "
@@ -43,10 +43,24 @@
         v-text="t"
       />
     </div>
+
+    <div
+      style="
+        text-align: center;
+        text-align: center;
+        position: absolute;
+        top: 60%;
+        left: 49%;
+        transform: translate(-50%, -50%);
+      "
+    >
+      <main-page-button-vue></main-page-button-vue>
+    </div>
   </div>
 </template>
 
 <script>
+import MainPageButtonVue from "@/components/utils/MainPageButton.vue";
 export default {
   name: "section-1",
   data() {
@@ -54,6 +68,9 @@ export default {
       text1: "Trip's ketch",
       text2: "Sketch your Trip",
     };
+  },
+  components: {
+    MainPageButtonVue,
   },
 };
 </script>

@@ -1,14 +1,22 @@
 <template>
   <div id="dark-main-section2">
     <div class="container">
-      <div class="row">
-        <div class="col-md-5">
+      <div class="d-flex justify-content-center">
+        <div class="col-md-5" style="margin: 10vh 10vh">
           <h1 style="color: white">Today's Recommendation</h1>
         </div>
       </div>
 
-      <div class="row">
-        <div class="col-md-2">
+      <div class="row justify-content-around" style="margin-top: 40px">
+        <div class="col-md-3" style="border: solid 1px white; padding: 10px 10px">
+          <dark-main-section-2-place></dark-main-section-2-place>
+        </div>
+
+        <div class="col-md-3" style="border: solid 1px white; padding: 10px 10px">
+          <dark-main-section-2-place></dark-main-section-2-place>
+        </div>
+
+        <div class="col-md-3" style="border: solid 1px white; padding: 10px 10px">
           <dark-main-section-2-place></dark-main-section-2-place>
         </div>
       </div>
