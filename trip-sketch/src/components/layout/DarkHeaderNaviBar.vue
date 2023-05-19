@@ -46,6 +46,16 @@
 							<b-dropdown-item href="#">RU</b-dropdown-item>
 							<b-dropdown-item href="#">FA</b-dropdown-item>
 						</b-nav-item-dropdown>
+
+						<b-form-checkbox
+							style="margin: 10px 10px 0px 50px"
+							class="nav-color"
+							v-model="checked"
+							name="check-button"
+							switch
+						>
+							mode
+						</b-form-checkbox>
 					</b-navbar-nav>
 				</b-collapse>
 			</b-navbar>
@@ -54,7 +64,13 @@
 </template>
 
 <script>
-export default {};
+export default {
+	data() {
+		return {
+			checked: false,
+		};
+	},
+};
 </script>
 
 <style scoped lang="scss">
