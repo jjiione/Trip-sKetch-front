@@ -5,6 +5,11 @@
     <div class="button_base b11_3d_jumpback" style="margin-top: 10px;">
         <div>Detail</div>
     </div>
+<!-- <div>
+    <b-button  style="margin-top: 10px;" @click="modalShow = !modalShow">Detail</b-button>
+
+    <b-modal v-model="modalShow">Detail</b-modal>
+  </div> -->
 
 
 
@@ -16,6 +21,11 @@
 
 <script>
 export default {
+    data() {
+      return {
+        modalShow: false
+      }
+    }
 
 }
 </script>

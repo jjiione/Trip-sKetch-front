@@ -9,7 +9,7 @@
 <script>
 import DarkMainSection1 from "@/components/main/dark/section1/DarkMainSection1.vue";
 import DarkMainSection2 from "@/components/main/dark/section2/DarkMainSection2.vue";
-import DarkMainSection3 from "@/components/main/dark/DarkMainSection3.vue";
+import DarkMainSection3 from "@/components/main/dark/section3/DarkMainSection3.vue";
 export default {
   name: "MainPage",
   components: {
