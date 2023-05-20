@@ -13,17 +13,19 @@
         <div>장소 입력 예정</div>
         <div>3nights + Flight 5*Hotel</div>
         <div>$1,000</div>
-        <a class="btn btn-primary btn-outline" href="#"
-          >Book Now <i class="icon-arrow-right22"></i
-        ></a>
+       <dark-main-section-2-button></dark-main-section-2-button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import DarkMainSection2Button from "./DarkMainSection2Button.vue";
 export default {
   name: "placeCompent",
+  components: {
+    DarkMainSection2Button,
+  }
 };
 </script>
 
