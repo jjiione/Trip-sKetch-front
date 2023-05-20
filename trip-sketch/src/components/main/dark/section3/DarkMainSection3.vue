@@ -1,13 +1,22 @@
 <template>
   <div id="dark-main-section3">
-    <div id="map"></div>
+    <div class="container">
+      <div id="map"></div>
+      <dark-main-section-3-sidebar></dark-main-section-3-sidebar>
+
+    </div>
+    
   </div>
 </template>
 
 <script>
+import DarkMainSection3Sidebar from "./DarkMainSection3Sidebar.vue";
+
 export default {
   name: "KakaoMap",
-  components: {},
+  components: {
+    DarkMainSection3Sidebar,
+  },
   data() {
     return {
       map: null,
@@ -113,9 +122,17 @@ export default {
 </script>
 
 <style scoped>
+
+#dark-main-section3 {
+  background-color: black;
+  height: 100vh;
+  width: 100%;
+}
+
 #map {
   width: 60%;
   height: 80vh;
-  margin: 20px 20px 20px 20px;
+  /* margin: 20px 20px 20px 20px; */
+
 }
 </style>

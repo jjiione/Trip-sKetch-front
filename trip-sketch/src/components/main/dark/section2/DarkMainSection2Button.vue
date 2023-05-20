@@ -2,7 +2,7 @@
 
 
 
-    <div class="button_base b11_3d_jumpback" style="margin-top: 10px;">
+    <div class="button_base b11_3d_jumpback" style="margin-top: 10px;" data-toggle="modal" data-target="#myModal">
         <div>Detail</div>
     </div>
 <!-- <div>
@@ -10,6 +10,8 @@
 
     <b-modal v-model="modalShow">Detail</b-modal>
   </div> -->
+
+  
 
 
 
