@@ -1,24 +1,11 @@
 <template>
-  <div id="dark-main-section3">
-    <div class="container">
-      <main-seciton-3-map></main-seciton-3-map>
-      <dark-main-section-3-sidebar></dark-main-section-3-sidebar>
-
-    </div>
-    
-  </div>
+   <div id="map"></div>
 </template>
 
 <script>
-import DarkMainSection3Sidebar from "./DarkMainSection3Sidebar.vue";
-import MainSeciton3Map from "./MainSeciton3Map.vue";
-
 export default {
-  name: "section-3",
-  components: {
-    DarkMainSection3Sidebar,
-    MainSeciton3Map,
-  },
+  name: "KakaoMap",
+
   data() {
     return {
       map: null,
@@ -120,29 +107,11 @@ export default {
       }
     },
   },
-};
+
+}
 </script>
 
-<style scoped>
-
-#dark-main-section3 {
-  background: linear-gradient(-80deg,  #0C134F, black);
-  height: 100vh;
-  width: 100%;
-  animation: gradient 15s ease infinite;
-}
-
-@keyframes gradient {
-0% {
-background-position: 0% 50%;
-}
-50% {
-background-position: 100% 50%;
-}
-100% {
-background-position: 0% 50%;
-}
-}
+<style>
 
 #map {
   width: 60%;
@@ -150,4 +119,5 @@ background-position: 0% 50%;
   /* margin: 20px 20px 20px 20px; */
 
 }
+
 </style>

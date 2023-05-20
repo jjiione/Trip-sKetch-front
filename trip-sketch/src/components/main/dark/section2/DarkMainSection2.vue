@@ -37,9 +37,22 @@ export default {
 
 <style scoped>
 #dark-main-section2 {
-  background-color: black;
+background-color: black;
   height: 100vh;
   width: 100%;
   margin: 0px 0px 0px 0px;
+  animation: gradient 15s ease infinite;
+}
+
+@keyframes gradient {
+0% {
+background-position: 0% 50%;
+}
+50% {
+background-position: 100% 50%;
+}
+100% {
+background-position: 0% 50%;
+}
 }
 </style>

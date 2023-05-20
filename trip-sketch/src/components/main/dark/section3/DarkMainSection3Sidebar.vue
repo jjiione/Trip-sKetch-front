@@ -1,7 +1,7 @@
 <template>
   <div>
-    <b-button v-b-toggle.sidebar-1>Toggle Sidebar</b-button>
-    <b-sidebar id="sidebar-1" title="Sidebar" shadow>
+    <b-button v-b-toggle.sidebar-1>Plan List</b-button>
+    <b-sidebar id="sidebar-1" style="width:400px" title="내가 담은 Place" shadow>
       <div class="px-3 py-2">
         <p>
           Cras mattis consectetur purus sit amet fermentum. Cras justo odio, dapibus ac facilisis
