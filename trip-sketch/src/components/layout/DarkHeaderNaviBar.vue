@@ -39,7 +39,11 @@
             </b-nav-item>
 
             <b-nav-item-dropdown text="MyPage" style="margin: 0px 10px 0px 50px">
-              <b-dropdown-item href="#">EN</b-dropdown-item>
+              <b-dropdown-item href="#"
+                ><router-link :to="{ name: 'userinfo' }" style="color: cornflowerblue"
+                  >회원 정보 수정</router-link
+                ></b-dropdown-item
+              >
               <b-dropdown-item href="#">ES</b-dropdown-item>
               <b-dropdown-item href="#">RU</b-dropdown-item>
               <b-dropdown-item href="#">FA</b-dropdown-item>
