@@ -14,6 +14,9 @@ import BoardDelete from "@/components/board/BoardDelete";
 import UserLogin from "@/components/user/UserLogin";
 import UserLogout from "@/components/user/UserLogout";
 import UserSignup from "@/components/user/UserSignup";
+import UserInfo from "@/components/mypage/UserInfo";
+import MyPlans from "@/components/mypage/MyPlans";
+import MyReviews from "@/components/mypage/MyReviews";
 
 Vue.use(VueRouter);
 
@@ -76,6 +79,29 @@ const routes = [
 				path: "signup",
 				name: "usersignup",
 				component: UserSignup,
+			},
+		],
+	},
+	{
+		path: "/mypage",
+		name: "mypage",
+		component: TheUser,
+		redirect: "/mypage/userinfo",
+		children: [
+			{
+				path: "userinfo",
+				name: "userinfo",
+				component: UserInfo,
+			},
+			{
+				path: "myplans",
+				name: "myplans",
+				component: MyPlans,
+			},
+			{
+				path: "myreviews",
+				name: "myreviews",
+				component: MyReviews,
 			},
 		],
 	},

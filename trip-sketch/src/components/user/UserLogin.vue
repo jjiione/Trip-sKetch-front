@@ -1,7 +1,7 @@
 <template>
   <div id="user-login-top">
     <div id="user-login-form">
-      <form class="form-signin">
+      <form class="form-signin" style="margin-top: 5%">
         <img
           class="mb-4"
           src="@/assets/tripsketch_logo-removebg-preview.png"
@@ -50,7 +50,11 @@
         </div>
         <div class="pull-right" style="margin-top: 10px">
           <h6>
-            <a href="#" class="link footer-link"> Forgot password</a>
+            <a href="#" class="link footer-link"
+              ><router-link :to="{ name: 'userinfo' }" style="color: cornflowerblue"
+                >Forgot password</router-link
+              ></a
+            >
           </h6>
         </div>
         <p class="mt-5 mb-3 text-muted">&copy; trip-sketch</p>

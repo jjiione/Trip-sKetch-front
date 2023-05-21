@@ -34,12 +34,8 @@
             </div>
           </div>
           <div class="bt_wrap">
-            <button @click="checkValue">
-              <a href="#" class="on">등록</a>
-            </button>
-            <button @click="moveList">
-              <a href="#">취소</a>
-            </button>
+            <button class="on" @click="checkValue">등록</button>
+            <button @click="moveList">취소</button>
           </div>
         </div>
       </div>

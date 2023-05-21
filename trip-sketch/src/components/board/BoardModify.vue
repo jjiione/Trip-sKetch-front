@@ -36,8 +36,8 @@
           </div>
         </div>
         <div class="bt_wrap">
-          <button @click="checkValue"><a href="#" class="on">수정</a></button>
-          <button @click="moveList"><a href="#">목록</a></button>
+          <button class="on" @click="checkValue">수정</button>
+          <button @click="moveList">목록</button>
         </div>
       </div>
     </div>
