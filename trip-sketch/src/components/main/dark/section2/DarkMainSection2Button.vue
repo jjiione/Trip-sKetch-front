@@ -1,10 +1,16 @@
 <template>
-
-
-
-    <div class="button_base b11_3d_jumpback" style="margin-top: 10px;" data-toggle="modal" data-target="#myModal">
+    <div>
+        <div class="button_base b11_3d_jumpback" @click="modalShow = !modalShow" style="margin-top: 10px;" data-toggle="modal" data-target="#myModal">
         <div>Detail</div>
     </div>
+
+    <b-modal v-model="modalShow">Detail</b-modal>
+
+    </div>
+
+
+
+    
 <!-- <div>
     <b-button  style="margin-top: 10px;" @click="modalShow = !modalShow">Detail</b-button>
 

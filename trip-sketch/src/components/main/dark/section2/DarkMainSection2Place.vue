@@ -4,7 +4,7 @@
       <div>
         <img
           src="@/assets/testplace1.jpg"
-          style="width: 200px; height: 200px"
+          style="width: 200px; height: 150px"
           class="img-responsive"
         />
       </div>

@@ -3,7 +3,7 @@
     <div class="container">
       <div class="d-flex justify-content-center">
         <div class="col-md-5" style="margin: 10vh 10vh">
-          <h1 style="color: white">Today's Recommendation</h1>
+          <h1 style="color: white; text-align: center;">Today's Recommendation</h1>
         </div>
       </div>
 

@@ -54,7 +54,9 @@
         transform: translate(-50%, -50%);
       "
     >
+    <router-link :to="{ name: 'userlogin' }" style="color: gray">
       <main-page-button-vue></main-page-button-vue>
+    </router-link>
     </div>
   </div>
 </template>

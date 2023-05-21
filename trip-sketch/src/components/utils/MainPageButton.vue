@@ -35,14 +35,14 @@ export default {};
 .eff-7 {
   width: 140px;
   height: 50px;
-  border: 0px solid #5c469c;
+  border: 0px solid #150050;
   position: absolute;
   transition: all 0.5s ease;
   z-index: 1;
   box-sizing: border-box;
 }
 .button-7:hover .eff-7 {
-  border: 70px solid #5c469c;
+  border: 70px solid #150050;
 }
 .button-7:hover a {
   color: #fff;

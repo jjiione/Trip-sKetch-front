@@ -1,8 +1,8 @@
 <template>
   <div class="speech-bubble">
-        <div>
-            testtest
-        </div>
+    <div>
+        testtest
+    </div>
 		
 	</div>
 					
@@ -21,7 +21,7 @@ export default {
 	background: #a199b8;
 	border-radius: .4em;
     width:350px;
-    height: 250px;
+    height: 180px;
 }
 
 .speech-bubble:after {

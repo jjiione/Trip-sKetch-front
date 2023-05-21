@@ -2,12 +2,18 @@
 
     <div id="dark-main-section3">
         <div class="container">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2">
-                    <h2>Recent Review</h2>
-                </div>
-            </div>
+            <div class="d-flex justify-content-center">
+        <div class="col-md-5" style="margin: 10vh 10vh">
+          <h1 style="color: white; text-align: center;">Recent Review</h1>
+        </div>
+      </div>
             <div class="row justify-content-between">
+                <dark-main-section-3-review></dark-main-section-3-review>
+                <dark-main-section-3-review></dark-main-section-3-review>
+                <dark-main-section-3-review></dark-main-section-3-review>
+            </div>
+
+            <div class="row justify-content-between" style="margin-top: 100px;">
                 <dark-main-section-3-review></dark-main-section-3-review>
                 <dark-main-section-3-review></dark-main-section-3-review>
                 <dark-main-section-3-review></dark-main-section-3-review>
