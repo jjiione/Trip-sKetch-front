@@ -64,7 +64,6 @@
     </div>
   </div>
 </template>
-
 <script>
 export default {
   name: "UserSignup",
@@ -207,8 +206,8 @@ a:hover {
 }
 
 select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
+  /* -moz-appearance: none;
+  -webkit-appearance: none; */
   cursor: pointer;
   padding-left: 20px;
 }

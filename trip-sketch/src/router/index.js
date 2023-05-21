@@ -14,6 +14,7 @@ import BoardDelete from "@/components/board/BoardDelete";
 import UserLogin from "@/components/user/UserLogin";
 import UserLogout from "@/components/user/UserLogout";
 import UserSignup from "@/components/user/UserSignup";
+import UserFindPwd from "@/components/user/UserFindPwd";
 import UserInfo from "@/components/mypage/UserInfo";
 import MyPlans from "@/components/mypage/MyPlans";
 import MyReviews from "@/components/mypage/MyReviews";
@@ -79,6 +80,11 @@ const routes = [
 				path: "signup",
 				name: "usersignup",
 				component: UserSignup,
+			},
+			{
+				path: "findpwd",
+				name: "userfindpwd",
+				component: UserFindPwd,
 			},
 		],
 	},

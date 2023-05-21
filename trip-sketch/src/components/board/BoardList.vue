@@ -131,6 +131,22 @@ export default {
         allowOutsideClick: () => !Swal.isLoading(),
       }).then((result) => {
         if (result.isConfirmed) {
+          // const Toast = Swal.mixin({
+          //   toast: true,
+          //   position: "center-center",
+          //   showConfirmButton: false,
+          //   timer: 3000,
+          //   timerProgressBar: true,
+          //   didOpen: (toast) => {
+          //     toast.addEventListener("mouseenter", Swal.stopTimer);
+          //     toast.addEventListener("mouseleave", Swal.resumeTimer);
+          //   },
+          // });
+
+          // Toast.fire({
+          //   icon: "success",
+          //   title: "검색 조건이 정상적으로 설정되었습니다.",
+          // });
           Swal.fire({
             title: `${result.value.login}'s avatar`,
             imageUrl: result.value.avatar_url,

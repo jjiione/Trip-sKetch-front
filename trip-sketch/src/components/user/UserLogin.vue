@@ -51,7 +51,7 @@
         <div class="pull-right" style="margin-top: 10px">
           <h6>
             <a href="#" class="link footer-link"
-              ><router-link :to="{ name: 'userinfo' }" style="color: cornflowerblue"
+              ><router-link :to="{ name: 'userfindpwd' }" style="color: cornflowerblue"
                 >Forgot password</router-link
               ></a
             >
