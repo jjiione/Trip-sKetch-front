@@ -1,7 +1,10 @@
 <template>
   <div data-animate-effect="fadeIn">
     <div href="#" class="col" style="text-align: center">
-      <div>
+      <div v-if="imgList[0]">
+        <img :src="imgList[0]" style="width: 200px; height: 150px" class="img-responsive" />
+      </div>
+      <div v-else>
         <img
           src="@/assets/testplace1.jpg"
           style="width: 200px; height: 150px"
@@ -49,6 +52,7 @@ export default {
         chkpet: String,
         chkcreditcard: String,
       },
+      imgList: [],
     };
   },
   props: {
@@ -68,6 +72,16 @@ export default {
       .then((response) => {
         this.placeDetail = response.data;
         console.log(this.placeDetail);
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+
+    axios
+      .get(detailaddr + this.place.placeId + "/images")
+      .then((response) => {
+        this.imgList = response.data;
+        console.log(this.imgList);
       })
       .catch((error) => {
         console.dir(error);

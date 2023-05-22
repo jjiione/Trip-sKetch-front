@@ -1,6 +1,16 @@
 <template>
   <div>
-    <input v-model="query" />
+    <b-form inline>
+      <b-form-input
+        style="color: black"
+        v-model="query"
+        id="inline-form-input-name"
+        class="mb-2 mr-sm-2 mb-sm-0"
+        placeholder="검색어를 입력하세요"
+      ></b-form-input>
+
+      <b-button variant="primary">Save</b-button>
+    </b-form>
     <TransitionGroup
       tag="ul"
       :css="false"

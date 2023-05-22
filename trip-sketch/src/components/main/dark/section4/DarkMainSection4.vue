@@ -9,7 +9,7 @@
 
         <div class="col-md-3">
           <dark-main-section-4-search-tab></dark-main-section-4-search-tab>
-          <dark-main-section-4-search></dark-main-section-4-search>
+          <!-- <dark-main-section-4-search></dark-main-section-4-search> -->
           <dark-main-section-4-sidebar></dark-main-section-4-sidebar>
         </div>
       </div>
@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import DarkMainSection4Search from "./DarkMainSection4Search.vue";
+// import DarkMainSection4Search from "./DarkMainSection4Search.vue";
 import DarkMainSection4Sidebar from "./DarkMainSection4Sidebar.vue";
 import MainSeciton4Map from "./MainSeciton4Map.vue";
 import DarkMainSection4SearchTab from "./DarkMainSection4SearchTab.vue";
@@ -28,7 +28,7 @@ export default {
   components: {
     DarkMainSection4Sidebar,
     MainSeciton4Map,
-    DarkMainSection4Search,
+    // DarkMainSection4Search,
     DarkMainSection4SearchTab,
   },
   data() {

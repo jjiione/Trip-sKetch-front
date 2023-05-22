@@ -1,5 +1,5 @@
 <template>
-   <div id="map"></div>
+  <div id="map"></div>
 </template>
 
 <script>
@@ -107,16 +107,13 @@ export default {
       }
     },
   },
-
-}
+};
 </script>
 
 <style>
-
 #map {
   width: auto;
+  border-radius: 20px;
   /* margin: 20px 20px 20px 20px; */
-
 }
-
 </style>
