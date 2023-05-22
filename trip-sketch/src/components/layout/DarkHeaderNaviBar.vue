@@ -18,11 +18,9 @@
 
             <b-nav-item-dropdown text="community" style="margin: 0px 10px 0px 50px">
               <b-dropdown-item>
-                <router-link :to="{ name: 'boardlist' }" style="color: gray"
-                  >자유 게시판</router-link
-                >
+                <router-link :to="{ name: 'boardlist' }" style="color: gray">공지 사항</router-link>
               </b-dropdown-item>
-              <b-dropdown-item>공지 사항</b-dropdown-item>
+              <b-dropdown-item>자유 게시판</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
 

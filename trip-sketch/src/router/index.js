@@ -44,7 +44,7 @@ const routes = [
 				component: BoardCreate,
 			},
 			{
-				path: "view/:isbn",
+				path: "view",
 				name: "boardview",
 				component: BoardView,
 			},
