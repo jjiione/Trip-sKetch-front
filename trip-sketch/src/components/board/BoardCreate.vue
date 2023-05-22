@@ -46,8 +46,8 @@
 </template>
 
 <script>
-// import axios from "axios";
-// const url = "http://localhost:80/board/notice/list";
+import axios from "axios";
+const url = "http://localhost:80/board/notice/regist";
 export default {
 	name: "BoardCreate",
 	data() {
@@ -62,13 +62,6 @@ export default {
 				fileInfos: "",
 			},
 		};
-	},
-	created() {
-		// 비동기
-		// TODO : 글목록 얻기.
-		// axios.post(url).then((response) => {
-		// 	this.articles = response.data;
-		// });
 	},
 	methods: {
 		// 입력값 체크하기 - 체크가 성공하면 registArticle 호출
@@ -96,6 +89,12 @@ export default {
 			if (localStorage.articles) articles = JSON.parse(localStorage.articles);
 			articles.push(this.article);
 			localStorage.setItem("articles", JSON.stringify(articles));
+			axios.post(url, {
+				title: this.article.title,
+				content: this.article.content,
+				userId: this.article.userId,
+				// fileInfos: this.article.fileInfos,
+			});
 			this.$router.push({ name: "boardlist" });
 		},
 

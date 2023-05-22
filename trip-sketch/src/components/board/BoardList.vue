@@ -47,8 +47,8 @@
 					<tr v-for="(article, idx) in articles" :key="idx">
 						<td class="num">{{ article.articleId }}</td>
 						<td class="title">
-							<router-link :to="{ name: 'boardview', params: { title: article.title } }">{{
-								article.title
+							<router-link :to="{ name: 'boardview', params: { articleId: article.articleId } }">{{
+								article.articleId
 							}}</router-link>
 						</td>
 						<td class="writer">{{ article.userId }}</td>

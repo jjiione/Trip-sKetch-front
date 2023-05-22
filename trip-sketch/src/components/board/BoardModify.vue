@@ -9,27 +9,41 @@
 					<div class="title">
 						<dt>제목</dt>
 						<dd>
-							<input type="text" id="articleId" v-model="article[0].title" ref="title" />
+							<input type="text" name="title" id="title" v-model="article.title" ref="title" />
 						</dd>
 					</div>
 					<div class="info">
 						<dl>
 							<dt>작성자</dt>
 							<dd>
-								<input type="text" id="title" v-model="article[0].userId" ref="userId" />
+								<input
+									type="text"
+									name="userId"
+									id="userId"
+									readonly
+									v-model="article.userId"
+									ref="userId"
+								/>
 							</dd>
 						</dl>
 						<dl>
 							<dt>파일 첨부</dt>
 							<dd>
-								<input type="text" id="fileInfos" v-model="article[0].fileInfos" ref="fileInfos" />
+								<input
+									type="text"
+									name="fileInfos"
+									id="fileInfos"
+									v-model="article.fileInfos"
+									ref="fileInfos"
+								/>
 							</dd>
 						</dl>
 					</div>
 					<div class="cont">
 						<textarea
 							id="content"
-							v-model="article[0].content"
+							name="content"
+							v-model="article.content"
 							ref="content"
 							cols="35"
 							rows="5"
@@ -47,6 +61,8 @@
 </template>
 
 <script>
+const url = "http://localhost:80/board/notice/";
+import axios from "axios";
 export default {
 	name: "BoardModify",
 	data() {
@@ -62,13 +78,12 @@ export default {
 			// 작성자아이디, 제목, 내용이 없을 경우 각 항목에 맞는 메세지를 출력
 			let err = true;
 			let msg = "";
-			!this.article[0].title &&
-				((msg = "제목 입력해주세요"), (err = false), this.$refs.title.focus());
+			!this.article.title && ((msg = "제목 입력해주세요"), (err = false), this.$refs.title.focus());
 			err &&
-				!this.article[0].userId &&
+				!this.article.userId &&
 				((msg = "작성자 입력해주세요"), (err = false), this.$refs.userId.focus());
 			err &&
-				!this.article[0].content &&
+				!this.article.content &&
 				((msg = "글 내용 입력해주세요"), (err = false), this.$refs.content.focus());
 
 			if (!err) alert(msg);
@@ -79,7 +94,14 @@ export default {
 			console.log(this.article.articleId + "번 도서 수정 하러가자!!!!");
 			// 비동기
 			// TODO : 글번호에 해당하는 글정보 수정.
-			localStorage.setItem("articles", JSON.stringify(this.articles));
+			// localStorage.setItem("articles", JSON.stringify(this.articles));
+			// this.article = this.articles.filter((article) => article.articleId === this.articleId);
+			axios.put(url + "modify", null, {
+				articleId: this.article.articleId,
+				title: this.article.title,
+				content: this.article.content,
+				// fileInfos: this.article.fileInfos,
+			});
 			this.$router.push({ name: "boardlist" });
 		},
 
@@ -93,7 +115,9 @@ export default {
 		this.articleId = this.$route.params.articleId;
 		this.articles = new Array();
 		if (localStorage.articles) this.articles = JSON.parse(localStorage.getItem("articles"));
-		this.article = this.articles.filter((article) => article.articleId === this.articleId);
+		axios.get(url + this.articleId + "/view").then((response) => {
+			this.article = response.data;
+		});
 	},
 };
 </script>

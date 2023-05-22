@@ -7,28 +7,28 @@
 			<div class="board_view_wrap">
 				<div class="board_view">
 					<div class="title">
-						{{ article[0].title }}
+						{{ article.title }}
 					</div>
 					<div class="info">
 						<dl>
 							<dt>글번호</dt>
-							<dd>{{ article[0].articleId }}</dd>
+							<dd>{{ article.articleId }}</dd>
 						</dl>
 						<dl>
 							<dt>글쓴이</dt>
-							<dd>{{ article[0].userId }}</dd>
+							<dd>{{ article.userId }}</dd>
 						</dl>
 						<dl>
 							<dt>작성일</dt>
-							<dd>{{ article[0].createtime }}</dd>
+							<dd>{{ article.createtime }}</dd>
 						</dl>
 						<dl>
-							<dt>조회</dt>
-							<dd>{{ article[0].hit }}</dd>
+							<dt>조회수</dt>
+							<dd>{{ article.hit }}</dd>
 						</dl>
 					</div>
 					<div class="cont">
-						<p style="white-space: pre-line">{{ article[0].content }}</p>
+						<p style="white-space: pre-line">{{ article.content }}</p>
 					</div>
 				</div>
 				<div class="bt_wrap">
@@ -42,7 +42,7 @@
 </template>
 
 <script>
-const url = "http://localhost:80/board/notice/list";
+const url = "http://localhost:80/board/notice/";
 import axios from "axios";
 export default {
 	name: "BoardView",
@@ -57,23 +57,18 @@ export default {
 		this.articles = new Array();
 		if (localStorage.articles) this.articles = JSON.parse(localStorage.getItem("articles"));
 		this.article = this.articles.filter((article) => article.articleId === this.articleId);
-
-		axios.get(url).then((response) => {
+		axios.get(url + this.articleId + "/view").then((response) => {
 			this.article = response.data;
-			// console.log(response);
-			// console.log(response.data);
-			console.log(this.articles);
-			console.log(response.data);
 		});
 	},
 	methods: {
 		moveModifyBoard() {
 			console.log("글수정 하러가자!!!");
-			this.$router.push({ name: "boardmodify", params: { articleId: this.article[0].articleId } });
+			this.$router.push({ name: "boardmodify", params: { articleId: this.article.articleId } });
 		},
 		deleteBoard() {
 			console.log("글삭제 하러가자!!!");
-			this.$router.push({ name: "boarddelete", params: { articleId: this.article[0].articleId } });
+			this.$router.push({ name: "boarddelete", params: { articleId: this.article.articleId } });
 		},
 		moveList() {
 			console.log("글목록 보러가자!!!");
