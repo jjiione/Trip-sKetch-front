@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
     <div class="wrap">
       <h1>다양한 커리어 관련 이벤트를 만나보세요!</h1>
       <div class="tab">
@@ -47,4 +47,24 @@
       },
     },
   };
-  </script>
+  </script> -->
+
+<template>
+  <div>
+    <b-tabs content-class="mt-3" fill>
+      <b-tab title="지역으로 검색" active><p>I'm the first tab</p></b-tab>
+      <b-tab title="키워드로 검색"><p>I'm the second tab</p></b-tab>
+      <b-tab title="리뷰 많은 순"><p>I'm the tab with the very, very long title</p></b-tab>
+    </b-tabs>
+  </div>
+</template>
+
+<script>
+export default {};
+</script>
+
+<style scoped>
+* {
+  color: white;
+}
+</style>

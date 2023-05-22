@@ -10,10 +10,13 @@
       </div>
 
       <div style="text-align: center; color: white; margin-top: 5px">
-        <div>장소 입력 예정</div>
-        <div>3nights + Flight 5*Hotel</div>
-        <div>$1,000</div>
-       <dark-main-section-2-button></dark-main-section-2-button>
+        <div>{{ place.title }}</div>
+        <div>시도 : {{ place.sidoName }}</div>
+        <div>구군 : {{ place.gugunName }}</div>
+        <dark-main-section-2-button
+          :detail="placeDetail"
+          :place="place"
+        ></dark-main-section-2-button>
       </div>
     </div>
   </div>
@@ -21,11 +24,55 @@
 
 <script>
 import DarkMainSection2Button from "./DarkMainSection2Button.vue";
+import axios from "axios";
+const detailaddr = "http://localhost:80/place/";
 export default {
   name: "placeCompent",
+  data() {
+    return {
+      placeDetail: {
+        contentid: Number,
+        contenttypeid: String,
+        heritage1: String,
+        heritage2: String,
+        heritage3: String,
+        infocenter: String,
+        opendate: String,
+        restdate: String,
+        expguide: String,
+        expagerange: String,
+        accomcount: String,
+        useseason: String,
+        usetime: String,
+        parking: String,
+        chkbabycarriage: String,
+        chkpet: String,
+        chkcreditcard: String,
+      },
+    };
+  },
+  props: {
+    place: {
+      gugunName: String,
+      sidoName: String,
+      title: String,
+      placeId: Number,
+    },
+  },
   components: {
     DarkMainSection2Button,
-  }
+  },
+  created() {
+    axios
+      .get(detailaddr + this.place.placeId + "/detail")
+      .then((response) => {
+        this.placeDetail = response.data;
+        console.log(this.placeDetail);
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+  },
 };
 </script>
 
