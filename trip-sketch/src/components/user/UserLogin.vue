@@ -9,7 +9,7 @@
 					width="60%"
 					height=""
 				/>
-				<h1 class="h3 mb-3 fw-normal" style="margin-top: 10px">Please sign in</h1>
+				<h1 class="h3 mb-3 fw-normal" style="margin-top: 10px; color: black">Please sign in</h1>
 
 				<div class="form-floating">
 					<input
