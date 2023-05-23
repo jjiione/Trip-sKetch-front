@@ -38,33 +38,20 @@
 							<router-link :to="{ name: 'userlogin' }" style="color: white">Login</router-link>
 						</b-nav-item>
 
-<<<<<<< HEAD
 						<b-nav-item-dropdown text="MyPage" style="margin: 0px 10px 0px 50px">
 							<b-dropdown-item href="#"
 								><router-link :to="{ name: 'userinfo' }" style="color: cornflowerblue"
 									>회원 정보 수정</router-link
 								></b-dropdown-item
 							>
-							<b-dropdown-item href="#">ES</b-dropdown-item>
+							<b-dropdown-item>
+								<router-link :to="{ name: 'google' }" style="color: cornflowerblue"
+									>구글테스트</router-link
+								></b-dropdown-item
+							>
 							<b-dropdown-item href="#">RU</b-dropdown-item>
 							<b-dropdown-item href="#">FA</b-dropdown-item>
 						</b-nav-item-dropdown>
-=======
-            <b-nav-item-dropdown text="MyPage" style="margin: 0px 10px 0px 50px">
-              <b-dropdown-item href="#"
-                ><router-link :to="{ name: 'userinfo' }" style="color: cornflowerblue"
-                  >회원 정보 수정</router-link
-                ></b-dropdown-item
-              >
-              <b-dropdown-item>
-                <router-link :to="{ name: 'google' }" style="color: cornflowerblue"
-                  >구글테스트</router-link
-                ></b-dropdown-item
-              >
-              <b-dropdown-item href="#">RU</b-dropdown-item>
-              <b-dropdown-item href="#">FA</b-dropdown-item>
-            </b-nav-item-dropdown>
->>>>>>> 3bfcb50738a28630d9bcff2f91d0feea1a7c9658
 
 						<b-form-checkbox
 							style="margin: 10px 10px 0px 50px"
