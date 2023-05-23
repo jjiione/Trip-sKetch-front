@@ -9,24 +9,28 @@ import Axios from "axios";
 window.Swal = swal;
 window.axios = Axios;
 
-  // Import the functions you need from the SDKs you need
-import firebase from 'firebase'
+import firebase from 'firebase/compat/app';
+import 'firebase/compat/auth';
+import 'firebase/compat/firestore';
 
-  // Your web app's Firebase configuration
-  // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-  const firebaseConfig = {
-	apiKey: process.env.apiKey,
-	authDomain: process.env.authDomain,
-	projectId: process.env.projectId,
-	storageBucket: process.env.storageBucket,
-	messagingSenderId: process.env.messagingSenderId,
-	appId: process.env.appId,
-	measurementId: process.env.measurementId,
-  };
+const firebaseConfig = {
+  apiKey: "AIzaSyBOK7x5N5UnjY4TDqndzH7l5tvdNIsWFRc",
+  authDomain: "todo-app-e3cf0.firebaseapp.com",
+  projectId: "todo-app-e3cf0",
+  storageBucket: "todo-app-e3cf0.appspot.com",
+  messagingSenderId: "940016886081",
+  appId: "1:940016886081:web:91686613f16b1b1f8001c0",
+  measurementId: "G-JHPC7TP12K"
+};
 
-  // Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+// Use this to initialize the firebase App
+const firebaseApp = firebase.initializeApp(firebaseConfig);
 
+// Use these for db & auth
+const db = firebaseApp.firestore();
+const auth = firebase.auth();
+
+export { auth, db };
 // import VueLazyload from "vue-lazyload";
 
 Vue.config.productionTip = false;
