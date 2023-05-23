@@ -9,6 +9,12 @@ import Axios from "axios";
 window.Swal = swal;
 window.axios = Axios;
 
+// import sal from "sal.js"
+// import "./node_modules/sal.js/dist/sal.css"
+// import "~sal.js/sal.css"; 
+import sal from "sal.js";
+import "sal.js/dist/sal.css";
+
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
@@ -52,9 +58,13 @@ Vue.use(IconsPlugin);
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap-vue/dist/bootstrap-vue.css";
 
+
 Vue.config.productionTip = false;
 
 new Vue({
+	created() {
+		sal.init();
+	},
 	router,
 	store,
 	render: (h) => h(App),

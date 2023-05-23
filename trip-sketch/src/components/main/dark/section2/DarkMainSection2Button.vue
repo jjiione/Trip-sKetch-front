@@ -2,7 +2,7 @@
   <div>
     <div
       class="button_base b11_3d_jumpback"
-      @click="modalShow = !modalShow"
+      @click="showmodal"
       style="margin-top: 10px"
       data-toggle="modal"
       data-target="#myModal"
@@ -22,6 +22,8 @@
   </div>
 </template>
 
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 export default {
   data() {
@@ -54,6 +56,28 @@ export default {
       sidoName: String,
       title: String,
       contentId: Number,
+    },
+  },
+  methods: {
+    showmodal() {
+      Swal.fire({
+        title: "여행지 상세 정보",
+        html: `
+        <div> ${this.place.title}</div>
+      <div>${this.place.sidoName}</div>
+      <div>${this.place.gugunName}</div>
+      <div v-if=${this.detail.expguide}>${this.detail.expguide}</div>
+      <div v-else>세부 정보 없음</div>
+      <div>${this.detail.contentid}</div>
+      <div>${this.detail.restdate}</div>
+        `,
+        showClass: {
+          popup: "animate__animated animate__fadeInDown",
+        },
+        hideClass: {
+          popup: "animate__animated animate__fadeOutUp",
+        },
+      });
     },
   },
 };

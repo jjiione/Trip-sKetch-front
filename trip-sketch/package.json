@@ -16,6 +16,7 @@
     "firebase": "^9.22.0",
     "gsap": "^3.11.5",
     "jwt-decode": "^3.1.2",
+    "sal.js": "^0.8.5",
     "sweetalert2": "^11.7.5",
     "vue": "^2.7.14",
     "vue-lazyload": "^3.0.0",
