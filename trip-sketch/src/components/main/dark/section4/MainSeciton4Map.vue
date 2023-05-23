@@ -14,19 +14,20 @@ export default {
     };
   },
   props: {
-    chargers: [],
+    latitude: Number,
+    longitude: Number,
   },
   watch: {
-    chargers() {
+    latitude() {
       console.log("충전소", this.chargers);
       this.positions = [];
-      this.chargers.forEach((charger) => {
-        let obj = {};
-        obj.title = charger.statNm;
-        obj.latlng = new kakao.maps.LatLng(charger.lat, charger.lng);
 
-        this.positions.push(obj);
-      });
+      let obj = {};
+      // obj.title = charger.statNm;
+      obj.latlng = new kakao.maps.LatLng(this.latitude, this.longitude);
+
+      this.positions.push(obj);
+
       this.loadMaker();
     },
   },
@@ -81,7 +82,7 @@ export default {
         const marker = new kakao.maps.Marker({
           map: this.map, // 마커를 표시할 지도
           position: position.latlng, // 마커를 표시할 위치
-          title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+          // title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           //   image: markerImage, // 마커의 이미지
         });
         this.markers.push(marker);
@@ -113,7 +114,8 @@ export default {
 <style>
 #map {
   width: auto;
-  border-radius: 20px;
+  border-radius: 500px;
+  margin-right: 30px;
   /* margin: 20px 20px 20px 20px; */
 }
 </style>

@@ -13,7 +13,7 @@ export default {};
 .button-7 {
   width: 140px;
   height: 50px;
-  border: 2px solid #5c469c;
+  border: 2px solid white;
   border-radius: 10px;
   float: left;
   text-align: center;

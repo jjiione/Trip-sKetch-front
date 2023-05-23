@@ -60,7 +60,7 @@ export default {
       gugunName: String,
       sidoName: String,
       title: String,
-      placeId: Number,
+      contentId: Number,
     },
   },
   components: {
@@ -68,7 +68,7 @@ export default {
   },
   created() {
     axios
-      .get(detailaddr + this.place.placeId + "/detail")
+      .get(detailaddr + this.place.contentId + "/detail")
       .then((response) => {
         this.placeDetail = response.data;
         console.log(this.placeDetail);
@@ -78,7 +78,7 @@ export default {
       });
 
     axios
-      .get(detailaddr + this.place.placeId + "/images")
+      .get(detailaddr + this.place.contentId + "/images")
       .then((response) => {
         this.imgList = response.data;
         console.log(this.imgList);

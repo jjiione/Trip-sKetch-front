@@ -26,7 +26,10 @@
         {{ item.msg }}
       </li>
     </TransitionGroup>
-    <dark-main-section-4-list :placeList="placeList"></dark-main-section-4-list>
+    <dark-main-section-4-list
+      @location="location"
+      :placeList="placeList"
+    ></dark-main-section-4-list>
   </div>
 </template>
 
@@ -35,21 +38,15 @@ import gsap from "gsap";
 import DarkMainSection4SubmitButton from "./DarkMainSection4SubmitButton.vue";
 import DarkMainSection4List from "./DarkMainSection4List.vue";
 
-const list = [
-  { msg: "바다" },
-  { msg: "해수욕장" },
-  { msg: "산" },
-  { msg: "계곡" },
-  { msg: "숲" },
-  { msg: "산골" },
-  { msg: "도시" },
-];
+const list = [{ msg: "바다" }, { msg: "해수욕장" }, { msg: "산" }, { msg: "계곡" }, { msg: "숲" }];
 
 export default {
   data() {
     return {
       query: "",
       placeList: [],
+      latitude: Number,
+      longitude: Number,
     };
   },
   components: {
@@ -84,8 +81,14 @@ export default {
       });
     },
     checkit(placeList) {
-      alert(placeList);
+      // alert(placeList);
       this.placeList = placeList;
+    },
+    location(latitude, longitude) {
+      // alert(latitude, longitude);
+      this.latitude = latitude;
+      this.longitude = longitude;
+      this.$emit("location", this.latitude, this.longitude);
     },
   },
 };

@@ -31,6 +31,9 @@ const db = firebaseApp.firestore();
 const auth = firebase.auth();
 
 export { auth, db };
+	
+
+	
 // import VueLazyload from "vue-lazyload";
 
 Vue.config.productionTip = false;

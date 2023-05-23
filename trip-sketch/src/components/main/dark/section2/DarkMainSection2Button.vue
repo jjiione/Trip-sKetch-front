@@ -53,7 +53,7 @@ export default {
       gugunName: String,
       sidoName: String,
       title: String,
-      placeId: Number,
+      contentId: Number,
     },
   },
 };
