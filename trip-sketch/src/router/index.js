@@ -18,7 +18,7 @@ import UserFindPwd from "@/components/user/UserFindPwd";
 import UserInfo from "@/components/mypage/UserInfo";
 import MyPlans from "@/components/mypage/MyPlans";
 import MyReviews from "@/components/mypage/MyReviews";
-import GoogleTest from "@/components/testtest/GoogleTest"
+import GoogleTest from "@/components/testtest/GoogleTest";
 
 import store from "@/store";
 Vue.use(VueRouter);
@@ -64,7 +64,7 @@ const routes = [
 			{
 				path: "create",
 				name: "boardcreate",
-				// beforeEnter: onlyAuthUser,
+				beforeEnter: onlyAuthUser,
 				component: BoardCreate,
 			},
 			{
@@ -75,13 +75,13 @@ const routes = [
 			{
 				path: "modify",
 				name: "boardmodify",
-				// beforeEnter: onlyAuthUser,
+				beforeEnter: onlyAuthUser,
 				component: BoardModify,
 			},
 			{
 				path: "delete",
 				name: "boarddelete",
-				// beforeEnter: onlyAuthUser,
+				beforeEnter: onlyAuthUser,
 				component: BoardDelete,
 			},
 		],
@@ -143,7 +143,6 @@ const routes = [
 			},
 		],
 	},
-	
 ];
 
 const router = new VueRouter({

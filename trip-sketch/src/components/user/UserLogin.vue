@@ -2,9 +2,6 @@
 	<div id="user-login-top">
 		<div id="user-login-form">
 			<form class="form-signin" style="margin-top: 5%" @submit.prevent="onSubmit">
-				<b-alert show variant="danger" v-if="isLoginError"
-					>아이디 또는 비밀번호를 확인하세요.</b-alert
-				>
 				<img
 					class="mb-4"
 					src="@/assets/tripsketch_logo-removebg-preview.png"
@@ -69,6 +66,7 @@
 	</div>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
 import { mapState, mapActions } from "vuex";
 const memberStore = "memberStore";
@@ -99,6 +97,16 @@ export default {
 				await this.getUserInfo(token);
 				// console.log("4. confirm() userInfo :: ", this.userInfo);
 				this.$router.push({ name: "MainPage" });
+			} else {
+				Swal.fire({
+					html: `<div class="text-danger">아이디 또는 비밀번호를 확인하세요.</div>`,
+					// input: "text",
+					inputAttributes: {
+						autocapitalize: "off",
+					},
+					confirmButtonText: "OK",
+					showLoaderOnConfirm: true,
+				});
 			}
 		},
 	},
