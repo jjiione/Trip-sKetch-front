@@ -83,7 +83,9 @@ export default {
 			},
 		};
 	},
-	created() {},
+	created() {
+		// console.log(this.isLogin);
+	},
 	computed: {
 		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
 	},

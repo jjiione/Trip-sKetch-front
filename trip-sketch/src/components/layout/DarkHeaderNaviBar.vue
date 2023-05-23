@@ -35,12 +35,24 @@
 					<!-- Right aligned nav items -->
 					<b-navbar-nav class="ml-auto">
 						<b-nav-item style="margin: 0px 10px 0px 50px">
-							<router-link :to="{ name: 'userlogin' }" style="color: white">Login</router-link>
+							<router-link :to="{ name: 'userlogin' }" style="color: white" v-if="!this.userInfo"
+								>Login</router-link
+							>
+							<router-link
+								:to="{ name: 'userlogout' }"
+								style="color: white"
+								@click.native.prevent="onClickLogout"
+								v-else
+								>Logout</router-link
+							>
 						</b-nav-item>
 
 						<b-nav-item-dropdown text="MyPage" style="margin: 0px 10px 0px 50px">
 							<b-dropdown-item href="#"
-								><router-link :to="{ name: 'userinfo' }" style="color: cornflowerblue"
+								><router-link
+									:to="{ name: 'userinfo' }"
+									style="color: cornflowerblue"
+									v-if="this.userInfo"
 									>회원 정보 수정</router-link
 								></b-dropdown-item
 							>
@@ -70,11 +82,38 @@
 </template>
 
 <script>
+import { mapState, mapGetters, mapActions } from "vuex";
+const memberStore = "memberStore";
 export default {
 	data() {
 		return {
 			checked: false,
 		};
+	},
+	computed: {
+		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
+		...mapGetters(["checkUserInfo"]),
+	},
+	methods: {
+		...mapActions(memberStore, ["userLogout"]),
+		// ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+		onClickLogout() {
+			// this.SET_IS_LOGIN(false);
+			// this.SET_USER_INFO(null);
+			// sessionStorage.removeItem("access-token");
+			// if (this.$route.path != "/") this.$router.push({ name: "main" });
+			console.log(this.userInfo.userId);
+			//vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
+			//+ satate에 isLogin, userInfo 정보 변경)
+			// this.$store.dispatch("userLogout", this.userInfo.userid);
+			this.userLogout(this.userInfo.userId);
+			sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+			sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+			if (this.$route.path != "/") this.$router.push({ name: "MainPage" });
+		},
+	},
+	created() {
+		if (this.userInfo) console.log(this.userInfo.userId);
 	},
 };
 </script>
