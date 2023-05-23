@@ -89,10 +89,10 @@ export default {
 	created() {
 		// 비동기
 		// TODO : 글목록 얻기.
-		let articleList = JSON.parse(localStorage.getItem("articles"));
-		if (articleList) this.articles = articleList;
-		let navigation = JSON.parse(localStorage.getItem("navigation"));
-		if (navigation) this.navigation = navigation;
+		// let articleList = JSON.parse(localStorage.getItem("articles"));
+		// if (articleList) this.articles = articleList;
+		// let navigation = JSON.parse(localStorage.getItem("navigation"));
+		// if (navigation) this.navigation = navigation;
 		axios.get(url).then((response) => {
 			//   console.log(response);
 			//   console.log(response.data);
