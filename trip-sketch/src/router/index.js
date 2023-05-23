@@ -18,6 +18,7 @@ import UserFindPwd from "@/components/user/UserFindPwd";
 import UserInfo from "@/components/mypage/UserInfo";
 import MyPlans from "@/components/mypage/MyPlans";
 import MyReviews from "@/components/mypage/MyReviews";
+import GoogleTest from "@/components/testtest/GoogleTest"
 
 Vue.use(VueRouter);
 
@@ -109,8 +110,14 @@ const routes = [
 				name: "myreviews",
 				component: MyReviews,
 			},
+			{
+				path: "google",
+				name: "google",
+				component: GoogleTest,
+			},
 		],
 	},
+	
 ];
 
 const router = new VueRouter({

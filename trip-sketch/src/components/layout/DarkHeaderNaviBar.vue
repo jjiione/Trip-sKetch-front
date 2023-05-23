@@ -42,7 +42,11 @@
                   >회원 정보 수정</router-link
                 ></b-dropdown-item
               >
-              <b-dropdown-item href="#">ES</b-dropdown-item>
+              <b-dropdown-item>
+                <router-link :to="{ name: 'google' }" style="color: cornflowerblue"
+                  >구글테스트</router-link
+                ></b-dropdown-item
+              >
               <b-dropdown-item href="#">RU</b-dropdown-item>
               <b-dropdown-item href="#">FA</b-dropdown-item>
             </b-nav-item-dropdown>

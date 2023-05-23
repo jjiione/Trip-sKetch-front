@@ -3,12 +3,16 @@
     <div id="dark-main-section4-container">
       <div class="d-flex justify-content-center">
         <!-- <div class="col-md-7" style="background-color: blue;"> -->
-        <main-seciton-4-map class="col-md-7"></main-seciton-4-map>
+        <main-seciton-4-map
+          :latitude="latitude"
+          :longitude="longitude"
+          class="col-md-7"
+        ></main-seciton-4-map>
 
         <!-- </div> -->
 
         <div class="col-md-3">
-          <dark-main-section-4-search-tab></dark-main-section-4-search-tab>
+          <dark-main-section-4-search-tab @location="location"></dark-main-section-4-search-tab>
           <!-- <dark-main-section-4-search></dark-main-section-4-search> -->
           <dark-main-section-4-sidebar></dark-main-section-4-sidebar>
           <!-- <dark-main-section-4-list :placeList="placeList"></dark-main-section-4-list> -->
@@ -35,7 +39,16 @@ export default {
   data() {
     return {
       placeList: [],
+      latitude: Number,
+      longitude: Number,
     };
+  },
+  methods: {
+    location(latitude, longitude) {
+      // alert("main" + latitude);
+      this.latitude = latitude;
+      this.longitude = longitude;
+    },
   },
 };
 </script>
