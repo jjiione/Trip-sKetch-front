@@ -1,7 +1,10 @@
 <template>
 	<div id="user-login-top">
 		<div id="user-login-form">
-			<form class="form-signin" style="margin-top: 5%">
+			<form class="form-signin" style="margin-top: 5%" @submit.prevent="onSubmit">
+				<b-alert show variant="danger" v-if="isLoginError"
+					>아이디 또는 비밀번호를 확인하세요.</b-alert
+				>
 				<img
 					class="mb-4"
 					src="@/assets/tripsketch_logo-removebg-preview.png"
@@ -13,21 +16,23 @@
 
 				<div class="form-floating">
 					<input
-						type="email"
+						type="text"
 						class="form-control"
 						id="floatingInput"
-						placeholder="name@example.com"
+						v-model="user.userId"
+						placeholder="아이디를 입력해주세요"
+						@keyup.enter="login"
 					/>
-					<label for="floatingInput" class="label-name">Email address</label>
 				</div>
 				<div class="form-floating">
 					<input
 						type="password"
 						class="form-control"
 						id="floatingPassword"
-						placeholder="Password"
+						v-model="user.userPwd"
+						placeholder="비밀번호를 입력해주세요"
+						@keyup.enter="login"
 					/>
-					<label for="floatingPassword" class="label-name">Password</label>
 				</div>
 
 				<div>
@@ -65,17 +70,34 @@
 </template>
 
 <script>
+import { mapState, mapActions } from "vuex";
+const memberStore = "memberStore";
+
 export default {
 	name: "UserLogin",
 	data() {
 		return {
-			userinfo: Object,
+			user: {
+				userId: null,
+				userPwd: null,
+			},
 		};
 	},
 	created() {},
+	computed: {
+		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
+	},
 	methods: {
-		login() {
-			this.$router.push({ name: "MainPage" });
+		...mapActions(memberStore, ["userConfirm", "getUserInfo"]),
+		async login() {
+			await this.userConfirm(this.user);
+			let token = sessionStorage.getItem("access-token");
+			// console.log("1. confirm() token >> " + token);
+			if (this.isLogin) {
+				await this.getUserInfo(token);
+				// console.log("4. confirm() userInfo :: ", this.userInfo);
+				this.$router.push({ name: "MainPage" });
+			}
 		},
 	},
 };
