@@ -11,6 +11,7 @@
           <dark-main-section-4-search-tab></dark-main-section-4-search-tab>
           <!-- <dark-main-section-4-search></dark-main-section-4-search> -->
           <dark-main-section-4-sidebar></dark-main-section-4-sidebar>
+          <!-- <dark-main-section-4-list :placeList="placeList"></dark-main-section-4-list> -->
         </div>
       </div>
     </div>
@@ -32,7 +33,9 @@ export default {
     DarkMainSection4SearchTab,
   },
   data() {
-    return {};
+    return {
+      placeList: [],
+    };
   },
 };
 </script>
