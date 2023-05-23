@@ -1,8 +1,8 @@
 <template>
   <div data-animate-effect="fadeIn">
     <div href="#" class="col" style="text-align: center">
-      <div v-if="imgList[0]">
-        <img :src="imgList[0]" style="width: 200px; height: 150px" class="img-responsive" />
+      <div v-if="img">
+        <img :src="img" style="width: 200px; height: 150px" class="img-responsive" />
       </div>
       <div v-else>
         <img
@@ -14,6 +14,7 @@
 
       <div style="text-align: center; color: white; margin-top: 5px">
         <div>{{ place.title }}</div>
+        <div>{{ place.contentId }}</div>
         <div>시도 : {{ place.sidoName }}</div>
         <div>구군 : {{ place.gugunName }}</div>
         <dark-main-section-2-button
@@ -62,6 +63,8 @@ export default {
       title: String,
       contentId: Number,
     },
+    contentId: Number,
+    img: String,
   },
   components: {
     DarkMainSection2Button,
@@ -77,15 +80,29 @@ export default {
         console.dir(error);
       });
 
-    axios
-      .get(detailaddr + this.place.contentId + "/images")
-      .then((response) => {
-        this.imgList = response.data;
-        console.log(this.imgList);
-      })
-      .catch((error) => {
-        console.dir(error);
-      });
+    // axios
+    //   .get(detailaddr + this.place.contentId + "/images")
+    //   .then((response) => {
+    //     this.imgList = response.data;
+    //     console.log(this.imgList);
+    //   })
+    //   .catch((error) => {
+    //     console.dir(error);
+    //   });
+  },
+  watch: {
+    place() {
+      console.log("새로 받기" + detailaddr + this.place.contentId + "/detail");
+      axios
+        .get(detailaddr + this.place.contentId + "/detail")
+        .then((response) => {
+          this.placeDetail = response.data;
+          console.log(this.placeDetail);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    },
   },
 };
 </script>

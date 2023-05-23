@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" href="<%= BASE_URL %>favicon.ico" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.10/dist/sweetalert2.min.css"></link>
     <script
       type="text/javascript"
       src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ab875d88d46e8c95321681c7d548bd5c"
@@ -15,26 +16,7 @@
     ></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 
-    <script>
-      // Import the functions you need from the SDKs you need
-      import { initializeApp } from "firebase/app";
-      import { getAnalytics } from "firebase/analytics";
-      // Your web app's Firebase configuration
-      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-      const firebaseConfig = {
-        apiKey: process.env.apiKey,
-        authDomain: process.env.authDomain,
-        projectId: process.env.projectId,
-        storageBucket: process.env.storageBucket,
-        messagingSenderId: process.env.messagingSenderId,
-        appId: process.env.appId,
-        measurementId: process.env.measurementId,
-      };
-
-      // Initialize Firebase
-      const app = initializeApp(firebaseConfig);
-      const analytics = getAnalytics(app);
-    </script>
+ 
     <title><%= htmlWebpackPlugin.options.title %></title>
   </head>
   <body>
