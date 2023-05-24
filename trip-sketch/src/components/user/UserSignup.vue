@@ -4,7 +4,7 @@
 			<div class="image-holder">
 				<img src="@/assets/day/Road/mario-dobelmann-gw-aplKL3Qg-unsplash.jpg" alt="" />
 			</div>
-			<form action="" @submit.prevent="onSubmit">
+			<form action="" @submit.prevent>
 				<h3 style="color: black">Trip-Sketch</h3>
 				<div class="form-wrapper">
 					<input

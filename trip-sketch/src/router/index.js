@@ -155,6 +155,7 @@ const routes = [
 				path: "write",
 				name: "write",
 				component: ReviewWrite,
+				props:true,
 			}
 		]
 		

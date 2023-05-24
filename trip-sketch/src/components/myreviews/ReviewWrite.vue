@@ -2,27 +2,34 @@
 	<div class="wrapper">
 		<div class="inner" style="rgb: (255, 255, 255, 1)">
 			<div class="image-holder">
-				<img src="@/assets/day/Road/mario-dobelmann-gw-aplKL3Qg-unsplash.jpg" alt="" />
+				<img :src="img" alt="" style="height:500px"/>
 			</div>
 			<form action="" @submit.prevent="onSubmit">
 				<h3 style="color: black">Review 작성하기</h3>
 				<div class="form-wrapper">
-					<input type="text" placeholder="Username" id="name" name="name" ref="name" v-model="userInfo.name"
+					<!-- userId 수정 필요 -->
+					<input type="text" id="name" name="name" ref="name" v-model="tmpUserId"
 						class="form-control" />
 					<i class="zmdi zmdi-account"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="text" placeholder="Email Address" id="email" name="email" ref="email"
-						v-model="userInfo.email" class="form-control" />
+					<input type="text" id="email" name="title" ref="email"
+						v-model="reviewTitle" class="form-control" />
 					<i class="zmdi zmdi-email"></i>
 				</div>
 
+				<div class="form-wrapper">
+					<input type="number" id="rate" name="rate" ref="email"
+						v-model="reviewRate" class="form-control" />
+					<i class="zmdi zmdi-account-box"></i>
+				</div>
 
-				<b-form-textarea id="textarea" v-model="text" placeholder="Enter something..." rows="3"
+
+				<b-form-textarea id="textarea" v-model="reviewContent" placeholder="리뷰를 입력하세요" rows="3"
 					max-rows="6"></b-form-textarea>
 
-				<button @click="checkValue">
-					Register
+				<button @click="register">
+					등록하기
 					<i class="zmdi zmdi-arrow-right" style="color: white"></i>
 				</button>
 			</form>
@@ -31,39 +38,68 @@
 </template>
 <script>
 import axios from "axios";
-const url = "http://localhost:80/user/";
+const url = "http://localhost:80/place/review/regist";
+
+import { mapState, mapGetters, mapActions } from "vuex";
+const memberStore = "memberStore";
 export default {
 	name: "UserSignup",
 	data() {
 		return {
-			userInfo: {
-				name: "",
-				email: "",
-				userId: "",
-				userPwd: "",
-				question: "",
-				answer: "",
-			},
+			tmpUserId: 'SSAFY',
+			reviewImg: String,
+			reviewTitle: String,
+			reviewContent: "",
+			reviewRate : Number,
 		};
 	},
-	methods: {
-		// 입력값 체크하기 - 체크가 성공하면 registArticle 호출
-
-
-
-		async registUser() {
-			// 비동기
-			await axios.post(url + "regist", {
-				name: this.userInfo.name,
-				email: this.userInfo.email,
-				userId: this.userInfo.userId,
-				userPwd: this.userInfo.userPwd,
-				answer: this.userInfo.answer,
-				question: this.userInfo.question,
-			});
-			this.$router.push({ name: "userlogin" });
-		},
+	props: {
+		img: String,
+		contentId: Number,
+		title: String
 	},
+	computed: {
+		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
+		...mapGetters(["checkUserInfo"]),
+	},
+	methods: {
+		...mapActions(memberStore, ["userLogout"]),
+		// ...mapMutations(memberStore, ["SET_IS_LOGIN", "SET_USER_INFO"]),
+		onClickLogout() {
+			// this.SET_IS_LOGIN(false);
+			// this.SET_USER_INFO(null);
+			// sessionStorage.removeItem("access-token");
+			// if (this.$route.path != "/") this.$router.push({ name: "main" });
+			console.log(this.userInfo.userId);
+			//vuex actions에서 userLogout 실행(Backend에 저장 된 리프레시 토큰 없애기
+			//+ satate에 isLogin, userInfo 정보 변경)
+			// this.$store.dispatch("userLogout", this.userInfo.userid);
+			this.userLogout(this.userInfo.userId);
+			sessionStorage.removeItem("access-token"); //저장된 토큰 없애기
+			sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
+			if (this.$route.path != "/") this.$router.push({ name: "MainPage" });
+		},
+		register() {
+			console.log(this.contentId, this.reviewContent);
+			// 비동기
+			axios.post(url, {
+				placeId: this.contentId,
+				userId: this.tmpUserId,
+				content: this.reviewContent,
+				rate : this.reviewRate
+			});
+			this.$router.push({ name: "MainPage" });
+		
+		}
+	},
+	created() {
+		if (this.userInfo) console.log('userinfo' + this.userInfo.userId);
+		this.reviewImg = this.img;
+		this.reviewTitle = this.title;
+		console.log(this.reviewTitle);
+
+	},
+	
 };
 </script>
 
