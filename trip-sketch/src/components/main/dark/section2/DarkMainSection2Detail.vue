@@ -1,59 +1,12 @@
 <template>
     <div>
-
         <div class="container">
             <div class="slide-container">
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                        alt="">
+                <div class="slide-image" v-for="(data, idx) in imgList" :key="idx">
+                    <img :src="data" alt="">
                 </div>
 
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
 
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
-
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
-
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fCVFQSVCMyVBMCVFQyU5NiU5MSVFQyU5RCVCNHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
-            </div>
-
-            <div class="slide-container">
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1526336024174-e58f5cdd8e13?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=500&q=60"
-                        alt="">
-                </div>
-
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1533738363-b7f9aef128ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
-
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1573865526739-10659fec78a5?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NHx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
-
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8JUVBJUIzJUEwJUVDJTk2JTkxJUVDJTlEJUI0fGVufDB8fDB8fA%3D%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
-
-                <div class="slide-image">
-                    <img src="https://images.unsplash.com/photo-1561948955-570b270e7c36?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTB8fCVFQSVCMyVBMCVFQyU5NiU5MSVFQyU5RCVCNHxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=1600&q=60"
-                        alt="">
-                </div>
             </div>
             <div class="slide-container-bottom"></div>
         </div>
@@ -64,9 +17,8 @@
             <div>구군 : {{ place.gugunName }}</div>
             <div>여행지 정보 : {{ detail.expguide }}</div>
             <div>휴무일 : {{ detail.restdate }}</div>
-            <div class="button_base_in b11_3d_jumpback" @click="showmodal" style="margin-top: 10px" data-toggle="modal"
-                data-target="#myModal">
-                <div>Detail</div>
+            <div class="button_base_in b11_3d_jumpback" style="margin-top: 10px" data-target="#myModal">
+                <div>Review 작성</div>
             </div>
         </div>
 
@@ -75,11 +27,14 @@
 
 <script>
 
-
+import axios from "axios";
+const addr = "http://localhost:80/place/";
 
 export default {
     data() {
-        return {};
+        return {
+            imgList: [],
+        };
     },
     props: {
         detail: {
@@ -108,6 +63,17 @@ export default {
             contentId: Number,
         },
     },
+    created() {
+        axios
+            .get(addr + this.place.contentId + '/images')
+            .then((response) => {
+                this.imgList = response.data;
+                console.log(this.imgList);
+            })
+            .catch((error) => {
+                console.dir(error);
+            });
+    }
 
 };
 </script>
@@ -268,7 +234,7 @@ export default {
     justify-content: center;
     align-items: center;
 
-    animation: loop 3s linear infinite;
+    animation: loop 10s linear infinite;
 }
 
 /* 애니메이션 스탑 */
@@ -277,16 +243,16 @@ export default {
 }
 
 .slide-image {
-    width: 100px;
-    height: 100px;
+    width: 200px;
+    height: 300px;
     margin: 5px;
     cursor: pointer;
-    transition: transform 0.3s ease;
+    transition: transform 3s ease;
 }
 
 /* 이미지 hover시 커짐 */
 .slide-image:hover {
-    transform: scale(1.1);
+    transform: scale(1.5);
 }
 
 .slide-image>img {
