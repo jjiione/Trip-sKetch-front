@@ -1,30 +1,31 @@
 <template>
-  <div class="speech-bubble">
-    <div></div>
+  <div>
+    <img src="@/assets/paint.png" style="width: 350px; height: 200px; position: relative" />
   </div>
 </template>
 
 <script>
-import axios from "axios";
-const detailaddr = "http://localhost:80/review/current/list";
+// import axios from "axios";
+// const detailaddr = "http://localhost:80/review/current/list";
 
 export default {
   data() {
     return {
-      reviewList: [],
+      // reviewList: [],
     };
   },
-  created() {
-    axios
-      .get(detailaddr)
-      .then((response) => {
-        this.reviewList = response.data;
-        console.log(this.reviewList);
-      })
-      .catch((error) => {
-        console.dir(error);
-      });
-  },
+  prop: {},
+  // created() {
+  //   axios
+  //     .get(detailaddr)
+  //     .then((response) => {
+  //       this.reviewList = response.data;
+  //       console.log(this.reviewList);
+  //     })
+  //     .catch((error) => {
+  //       console.dir(error);
+  //     });
+  // },
 };
 </script>
 

@@ -15,17 +15,17 @@
       </div>
 
       <div
-        data-sal="slide-left"
-        data-sal-duration="300"
-        data-sal-delay="3000"
-        data-sal-easing="ease-out-back"
         class="row justify-content-around"
+        data-sal="slide-left"
+        data-sal-duration="500"
+        :data-sal-delay="100"
+        data-sal-easing="ease-out-back"
         style="margin-top: 40px"
       >
         <div
           v-for="(data, idx) in placeList"
           :key="idx"
-          class="col-md-3"
+          class="col-md-3 d-inline-block"
           style="border: solid 1px white; padding: 10px 10px"
         >
           <dark-main-section-2-place :img="imgList[idx]" :place="data"></dark-main-section-2-place>
