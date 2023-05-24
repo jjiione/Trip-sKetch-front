@@ -7,15 +7,23 @@
             
 <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-<nav role="navigation" class="primary-navigation" style="height:600px">
+<nav role="navigation" class="primary-navigation" style="height:600px; ">
   <ul>
-    <li>Home</li>
-    <li>Work &dtrif;
+    <li style="width:200px">시도 &dtrif;
+      <ul id="test" class="dropdown" style="overflow: scroll; height: 300px;width:100px" >
+        <li  v-for="(data, idx) in sidoList"  :key="idx" style="color:black; "> 
+          <div>
+            {{ data.sido_name }}
+          </div></li>
+      </ul>
+    </li>
+    
+    <li style="width:200px">Work &dtrif;
       <ul class="dropdown">
-        <li><a href="#">Web Development</a></li>
-        <li><a href="#">Web Design</a></li>
-        <li><a href="#">Illustration</a></li>
-        <li><a href="#">Iconography</a></li>
+        <li><div href="#">Web Development</div></li>
+        <li><div href="#">Web Design</div></li>
+        <li><div href="#">Illustration</div></li>
+        <li><div href="#">Iconography</div></li>
       </ul>
     </li>
 
@@ -27,11 +35,54 @@
 
 
       </b-tab>
+      
       <b-tab title="키워드로 검색"
         ><dark-main-section-4-search @location="location"></dark-main-section-4-search
       ></b-tab>
-      <b-tab title="리뷰 많은 순">
-        <li></li>
+      
+    
+      <b-tab title="지역으로 검색" active>
+        <div class="row">
+          <div class="col">
+            
+<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
+
+<nav role="navigation" class="primary-navigation" style="height:600px; ">
+  <ul>
+    <li style="width:130px">대분류 &dtrif;
+      <ul id="test" class="dropdown" style="overflow: scroll; height: 300px;width:100px" >
+        <li  v-for="(data, idx) in sidoList"  :key="idx" style="color:black; "> 
+          <div>
+            {{ data.sido_name }}
+          </div></li>
+      </ul>
+    </li>
+    
+    <li style="width:130px">중분류 &dtrif;
+      <ul class="dropdown">
+        <li><div href="#">Web Development</div></li>
+        <li><div href="#">Web Design</div></li>
+        <li><div href="#">Illustration</div></li>
+        <li><div href="#">Iconography</div></li>
+      </ul>
+    </li>
+
+    <li style="width:130px">소분류 &dtrif;
+      <ul class="dropdown">
+        <li><div href="#">Web Development</div></li>
+        <li><div href="#">Web Design</div></li>
+        <li><div href="#">Illustration</div></li>
+        <li><div href="#">Iconography</div></li>
+      </ul>
+    </li>
+
+  </ul>
+</nav>
+
+          </div>
+        </div>
+
+
       </b-tab>
     </b-tabs>
   </div>
@@ -39,12 +90,16 @@
 
 <script>
 import DarkMainSection4Search from "./DarkMainSection4Search.vue";
+import axios from "axios";
 
+const addr = "http://localhost:80/place/sido/list";
 export default {
   data() {
     return {
       latitude: Number,
       longitude: Number,
+      sidoList: [],
+      gugunList:[],
     };
   },
   components: {
@@ -57,10 +112,45 @@ export default {
       this.$emit("location", this.latitude, this.longitude);
     },
   },
+  created(){
+    axios
+      .get(addr)
+      .then((response) => {
+        this.sidoList = response.data;
+        console.log(this.sidoList);
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+  }
 };
 </script>
 
 <style scoped  lang="scss">
+#test {
+                width: 200px;
+                height: 400px;
+                overflow: auto;
+                color: white;
+                padding: 5px;
+            }
+ 
+            #test::-webkit-scrollbar {
+                width: 20px; /*스크롤바의 너비*/
+            }
+ 
+            #test::-webkit-scrollbar-thumb {
+                background-color: #0c134f; /*스크롤바의 색상*/
+                background-clip: padding-box;
+                border: 4px solid transparent;
+                border-top-left-radius: 50px;
+                border-bottom-right-radius: 50px;
+            }
+ 
+            #test::-webkit-scrollbar-track {
+                background-color: grey; /*스크롤바 트랙 색상*/
+            }
+
 nav {
   &.primary-navigation {
     margin: 0 auto;
@@ -83,11 +173,11 @@ nav {
       font-family: arvo;
     }
 
-    li a {
+    li div {
       color: black;
     }
 
-    li a:hover {
+    li div:hover {
       color: #3ca0e7;
     }
 
@@ -124,7 +214,7 @@ padding-left: 0;
       border-style: none;
     }
 
-    ul li ul li a:hover {
+    ul li ul li div:hover {
       padding-left: 10px;
       border-left: 2px solid #3ca0e7;
       transition: all 0.3s ease;
@@ -142,7 +232,7 @@ a {
  
 }
 
- ul li ul li a { transition: all 0.5s ease; }
+ ul li ul li div { transition: all 0.5s ease; }
 
 
 * {

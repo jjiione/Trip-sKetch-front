@@ -1,8 +1,11 @@
 <template>
 	<div class="wrapper">
 		<div class="inner" style="rgb: (255, 255, 255, 1)">
-			<div class="image-holder">
-				<img :src="img" alt="" style="height:500px"/>
+			<div v-if="reviewImg" class="image-holder">
+				<img :src="img" alt="" style="height:500px; width:450px"/>
+			</div>
+			<div v-else>
+				<img src="@/assets/testplace1.jpg" alt="" style="height:500px; width:450px"/>
 			</div>
 			<form action="" @submit.prevent="onSubmit">
 				<h3 style="color: black">Review 작성하기</h3>
@@ -93,9 +96,11 @@ export default {
 		}
 	},
 	created() {
+
 		if (this.userInfo) console.log('userinfo' + this.userInfo.userId);
 		this.reviewImg = this.img;
 		this.reviewTitle = this.title;
+	
 		console.log(this.reviewTitle);
 
 	},
