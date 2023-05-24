@@ -1,21 +1,27 @@
 <template>
   <div id="dark-main-section3">
-    <div class="container">
+    <div
+      class="container"
+      data-sal="slide-up"
+      data-sal-duration="100"
+      :data-sal-delay="600"
+      data-sal-easing="ease-out-back"
+    >
       <div class="d-flex justify-content-center">
         <div class="col-md-5" style="margin: 10vh 10vh">
           <h1 style="color: white; text-align: center">Recent Review</h1>
         </div>
       </div>
       <div class="row justify-content-between">
-        <dark-main-section-3-review></dark-main-section-3-review>
-        <dark-main-section-3-review></dark-main-section-3-review>
-        <dark-main-section-3-review></dark-main-section-3-review>
+        <dark-main-section-3-review :review="reviewList[0]"></dark-main-section-3-review>
+        <dark-main-section-3-review :review="reviewList[1]"></dark-main-section-3-review>
+        <dark-main-section-3-review :review="reviewList[2]"></dark-main-section-3-review>
       </div>
 
-      <div class="row justify-content-between" style="margin-top: 100px">
-        <dark-main-section-3-review></dark-main-section-3-review>
-        <dark-main-section-3-review></dark-main-section-3-review>
-        <dark-main-section-3-review></dark-main-section-3-review>
+      <div class="row justify-content-between">
+        <dark-main-section-3-review :review="reviewList[3]"></dark-main-section-3-review>
+        <dark-main-section-3-review :review="reviewList[4]"></dark-main-section-3-review>
+        <dark-main-section-3-review :review="reviewList[5]"></dark-main-section-3-review>
       </div>
     </div>
   </div>
@@ -23,8 +29,9 @@
 
 <script>
 import axios from "axios";
+import sal from "sal.js";
 import DarkMainSection3Review from "./DarkMainSection3Review.vue";
-const detailaddr = "http://localhost:80/review/current/list";
+const detailaddr = "http://localhost:80/place/review/current/list";
 
 export default {
   name: "section-3",
@@ -37,6 +44,7 @@ export default {
     };
   },
   created() {
+    sal();
     axios
       .get(detailaddr)
       .then((response) => {
@@ -46,6 +54,9 @@ export default {
       .catch((error) => {
         console.dir(error);
       });
+  },
+  mounted() {
+    sal();
   },
 };
 </script>

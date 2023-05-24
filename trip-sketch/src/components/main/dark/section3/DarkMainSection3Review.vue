@@ -1,6 +1,17 @@
 <template>
-  <div>
-    <img src="@/assets/paint.png" style="width: 350px; height: 200px; position: relative" />
+  <div style="position: relative">
+    <img src="@/assets/paint.png" style="width: 350px; height: 230px" />
+    <div class="contents">
+      <div v-if="review.content.length < 20">
+        {{ review.content }}
+      </div>
+      <div v-else>
+        {{ review.content.substr(0, 20) }}
+        <span style="color: blue">...더보기</span>
+      </div>
+      <div>여행지 : {{ review.title }}</div>
+      <div>작성자 : {{ review.userId }}</div>
+    </div>
   </div>
 </template>
 
@@ -12,24 +23,34 @@ export default {
   data() {
     return {
       // reviewList: [],
+      contentLength: String,
     };
   },
-  prop: {},
-  // created() {
-  //   axios
-  //     .get(detailaddr)
-  //     .then((response) => {
-  //       this.reviewList = response.data;
-  //       console.log(this.reviewList);
-  //     })
-  //     .catch((error) => {
-  //       console.dir(error);
-  //     });
-  // },
+  props: {
+    review: {
+      placeId: Number,
+      createTime: String,
+      content: String,
+      rate: Number,
+      title: String,
+      userId: String,
+    },
+  },
+  created() {
+    this.contentLength = this.content.length;
+  },
 };
 </script>
 
-<style>
+<style scoped>
+.contents {
+  position: absolute;
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: black;
+  font-size: 14px;
+}
 .speech-bubble {
   position: relative;
   background: #a199b8;

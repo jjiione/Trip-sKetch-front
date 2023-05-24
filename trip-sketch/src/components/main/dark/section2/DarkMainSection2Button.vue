@@ -2,34 +2,31 @@
   <div>
     <div
       class="button_base b11_3d_jumpback"
-      @click="showmodal"
+      @click="modalShow = !modalShow"
       style="margin-top: 10px"
-      data-toggle="modal"
-      data-target="#myModal"
     >
       <div>Detail</div>
     </div>
 
     <b-modal v-model="modalShow">
-      <div>{{ place.title }}</div>
-      <div>{{ place.sidoName }}</div>
-      <div>{{ place.gugunName }}</div>
-      <div v-if="detail.expguide">{{ detail.expguide }}</div>
-      <div v-else>세부 정보 없음</div>
-      <div>{{ detail.contentid }}</div>
-      <div>{{ detail.restdate }}</div>
+      <DarkMainSection2Detail :detail="detail" :place="place"></DarkMainSection2Detail>
     </b-modal>
   </div>
 </template>
 
-<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<!-- <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> -->
 <script>
+import DarkMainSection2Detail from "./DarkMainSection2Detail.vue";
+
 export default {
   data() {
     return {
       modalShow: false,
     };
+  },
+  components: {
+    DarkMainSection2Detail,
   },
   props: {
     detail: {
@@ -60,24 +57,18 @@ export default {
   },
   methods: {
     showmodal() {
-      Swal.fire({
-        title: "여행지 상세 정보",
-        html: `
-        <div> ${this.place.title}</div>
-      <div>${this.place.sidoName}</div>
-      <div>${this.place.gugunName}</div>
-      <div v-if=${this.detail.expguide}>${this.detail.expguide}</div>
-      <div v-else>세부 정보 없음</div>
-      <div>${this.detail.contentid}</div>
-      <div>${this.detail.restdate}</div>
-        `,
-        showClass: {
-          popup: "animate__animated animate__fadeInDown",
-        },
-        hideClass: {
-          popup: "animate__animated animate__fadeOutUp",
-        },
-      });
+      // Swal.fire({
+      //   title: "여행지 상세 정보",
+      //   html: `
+      //   <dark-main-section-2-detail></dark-main-section-2-detail>
+      //   `,
+      //   showClass: {
+      //     popup: "animate__animated animate__fadeInDown",
+      //   },
+      //   hideClass: {
+      //     popup: "animate__animated animate__fadeOutUp",
+      //   },
+      // });
     },
   },
 };
@@ -96,6 +87,24 @@ export default {
   .back {
     width: 100%;
   }
+}
+
+.button_base_in {
+  border: 0;
+  font-size: 18px;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  /* margin-top: -25px; */
+  margin-left: -100px;
+  width: 200px;
+  height: 50px;
+  text-align: center;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-user-select: none;
+  cursor: default;
 }
 
 .button_base {
