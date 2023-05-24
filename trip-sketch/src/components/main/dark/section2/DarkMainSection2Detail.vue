@@ -11,14 +11,20 @@
             <div class="slide-container-bottom"></div>
         </div>
 
-        <div>
+        <div style="margin-top : 20px">
             <div>여행지 : {{ place.title }}</div>
             <div>시도 : {{ place.sidoName }}</div>
             <div>구군 : {{ place.gugunName }}</div>
             <div>여행지 정보 : {{ detail.expguide }}</div>
             <div>휴무일 : {{ detail.restdate }}</div>
             <div class="button_base_in b11_3d_jumpback" style="margin-top: 10px" data-target="#myModal">
-                <div>Review 작성</div>
+                <router-link :to="{ name: 'write' }" style="color: white">
+                    <div>Review 작성</div>
+                </router-link>
+
+
+
+
             </div>
         </div>
 

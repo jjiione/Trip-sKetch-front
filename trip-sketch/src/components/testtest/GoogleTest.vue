@@ -1,6 +1,7 @@
 <template>
   <div>
     <button @click="googleSignIn">Sign In with Google</button>
+    <!-- <div class="g-signin2" id="google-signin-btn" data-onsuccess="onSignIn"></div> -->
   </div>
 </template>
 
@@ -9,6 +10,9 @@ import firebase from "firebase/compat/app";
 import "firebase/compat/auth";
 export default {
   name: "SignUp",
+  created() {
+    window.onSignIn = this.onSignIn;
+  },
   methods: {
     googleSignIn: function () {
       let provider = new firebase.auth.GoogleAuthProvider();
@@ -27,4 +31,6 @@ export default {
     },
   },
 };
-</script>
+</script> 
+
+

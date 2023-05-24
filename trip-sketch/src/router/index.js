@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import MainPage from "@/views/main/MainPage";
 import TheBoard from "@/views/BoardView.vue";
 import TheUser from "@/views/UserView.vue";
+import TheReview from "@/views/ReviewView.vue";
 
 // components
 import BoardList from "@/components/board/BoardList";
@@ -19,6 +20,7 @@ import UserInfo from "@/components/mypage/UserInfo";
 import MyPlans from "@/components/mypage/MyPlans";
 import MyReviews from "@/components/mypage/MyReviews";
 import GoogleTest from "@/components/testtest/GoogleTest";
+import ReviewWrite from "@/components/myreviews/ReviewWrite";
 
 import store from "@/store";
 Vue.use(VueRouter);
@@ -142,6 +144,20 @@ const routes = [
 				component: GoogleTest,
 			},
 		],
+	},
+	{
+		path: "/review",
+		name: "review",
+		component: TheReview,
+		redirect: "/review/write",
+		children: [
+			{
+				path: "write",
+				name: "write",
+				component: ReviewWrite,
+			}
+		]
+		
 	},
 ];
 
