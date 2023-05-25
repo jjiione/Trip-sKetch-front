@@ -5,9 +5,10 @@
                 <div class="slide-image" v-for="(data, idx) in imgList" :key="idx">
                     <img :src="data" alt="">
                 </div>
-
-
             </div>
+
+
+
             <div class="slide-container-bottom"></div>
         </div>
 
@@ -17,16 +18,26 @@
             <div>구군 : {{ place.gugunName }}</div>
             <div>여행지 정보 : {{ detail.expguide }}</div>
             <div>휴무일 : {{ detail.restdate }}</div>
-            <div class="button_base_in b11_3d_jumpback" style="margin-top: 10px" data-target="#myModal">
-                <router-link :to="{
-                    name: 'write',
-                    params: { img: imgList[0], contentId: place.contentId, title: place.title, userId: user.userId }
-                }" style="color: white">
-                    <div>Review 작성</div>
-                </router-link>
+            <div class="row justify-content-around" style="margin-top: -30px; margin-bottom: 50px;">
+                <div class="btn-base-in text-center b11_3d_jumpback" style="margin-top: 10px; margin-right:0px"
+                    data-target="#myModal">
+                    <router-link :to="{
+                        name: 'write',
+                        params: { img: imgList[0], contentId: place.contentId, title: place.title, userId: user.userId }
+                    }" style="color: white">
+                        <div>Review 작성</div>
+                    </router-link>
+                </div>
 
-
-
+                <div class="btn-base-in text-center b11_3d_jumpback" style="margin-top: 10px; margin-right:40px"
+                    data-target="#myModal">
+                    <router-link :to="{
+                        name: 'write',
+                        params: { img: imgList[0], contentId: place.contentId, title: place.title, userId: user.userId }
+                    }" style="color: white">
+                        <div>Review 작성</div>
+                    </router-link>
+                </div>
 
             </div>
         </div>
@@ -94,16 +105,23 @@ export default {
 </script>
 
 <style scoped>
+.btn-base-in {
+    padding: 30px;
+    width: 130px;
+    margin-left: -30px;
+    margin-top: -50px;
+}
+
 .button_base_in {
     border: 0;
     font-size: 18px;
-    position: relative;
-    top: 50%;
-    left: 50%;
+    /* position: relative; */
+    /* top: 50%;
+    left: 50%; */
     /* margin-top: -25px; */
-    margin-left: -100px;
-    width: 200px;
-    height: 50px;
+    /* margin-left: -100px; */
+    width: 130px;
+    height: 40px;
     text-align: center;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;
@@ -115,13 +133,13 @@ export default {
 .button_base {
     border: 0;
     font-size: 18px;
-    position: relative;
-    top: 50%;
-    left: 50%;
+    /* position: relative; */
+    /* top: 50%; */
+    /* left: 50%; */
     margin-top: -25px;
-    margin-left: -100px;
-    width: 200px;
-    height: 50px;
+    /* margin-left: -100px; */
+    /* width: 200px;
+    height: 50px; */
     text-align: center;
     box-sizing: border-box;
     -webkit-box-sizing: border-box;

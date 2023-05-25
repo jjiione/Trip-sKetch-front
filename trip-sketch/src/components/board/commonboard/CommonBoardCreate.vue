@@ -19,7 +19,7 @@
 							<dl>
 								<dt>파일 첨부</dt>
 								<dd>
-									<input type="text" id="fileInfos" ref="fileInfos" v-model="article.fileInfos" />
+									<input id="file-selector" ref="file" type="file" @change="handleFileUpload()" />
 								</dd>
 							</dl>
 						</div>
@@ -48,6 +48,7 @@
 <script>
 import axios from "axios";
 const url = "http://localhost:80/board/common/regist";
+import AWS from 'aws-sdk';
 export default {
 	name: "CommonBoardCreate",
 	data() {
@@ -62,6 +63,11 @@ export default {
 				boardType: "",
 				fileInfos: "",
 			},
+			file: null,
+
+			albumBucketName: 'trips-ketch',
+			bucketRegion: 'ap-northeast-2',
+			IdentifyPoolId: 'ap-northeast-2:fdcfec3c-d67d-4491-ac5e-1f9ba8ad1777',
 		};
 	},
 	methods: {
@@ -84,6 +90,7 @@ export default {
 			else this.registArticle();
 		},
 		async registArticle() {
+			this.uploadFile();
 			// 비동기
 			// TODO : 글번호에 해당하는 글정보 등록.
 			let articles = new Array();
@@ -94,6 +101,7 @@ export default {
 				title: this.article.title,
 				content: this.article.content,
 				userId: this.article.userId,
+				img: 'ap-northeast-2:fdcfec3c-d67d-4491-ac5e-1f9ba8ad1777' + this.file.name,
 				// fileInfos: this.article.fileInfos,
 			});
 			this.$router.push({ name: "commonboardlist" });
@@ -101,6 +109,41 @@ export default {
 
 		moveList() {
 			this.$router.push({ name: "commonboardlist" });
+		},
+		handleFileUpload() {
+			this.file = this.$refs.file.files[0]
+			console.log("file select");
+		},
+		uploadFile() {
+			AWS.config.update({
+				region: this.bucketRegion,
+				credentials: new AWS.CognitoIdentityCredentials({
+					IdentityPoolId: 'ap-northeast-2:fdcfec3c-d67d-4491-ac5e-1f9ba8ad1777',
+
+				})
+			});
+
+			var s3 = new AWS.S3({
+				apiVersion: "2006-03-01",
+				params: {
+					Bucket: this.albumBucketName
+				}
+			});
+
+			let photoKey = this.file.name;
+
+			s3.upload({
+				Key: photoKey,
+				Body: this.file,
+				ACL: 'public-read'
+			}, (err, data) => {
+				if (err) {
+					console.log(err);
+					return alert("파일 업로드 실패!!");
+				}
+				alert("파일 업로드 성공");
+				console.log(data);
+			});
 		},
 	},
 };
