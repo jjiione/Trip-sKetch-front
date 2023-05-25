@@ -48,7 +48,7 @@ const onlyAuthUser = async (to, from, next) => {
 
 const routes = [
 	{
-		path: "/",
+		path: "",
 		name: "MainPage",
 		component: MainPage,
 	},

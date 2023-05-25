@@ -4,80 +4,107 @@
       <b-tab title="지역으로 검색" active>
         <div class="row">
           <div class="col">
-            
-<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-<nav role="navigation" class="primary-navigation" style="height:600px; ">
-  <ul>
-    <li style="width:200px">시도 &dtrif;
-      <ul id="test" class="dropdown" style="overflow: scroll; height: 300px;width:100px" >
-        <li  v-for="(data, idx) in sidoList"  :key="idx" style="color:black; "> 
-          <div>
-            {{ data.sido_name }}
-          </div></li>
-      </ul>
-    </li>
-    
-    <li style="width:200px">Work &dtrif;
-      <ul class="dropdown">
-        <li><div href="#">Web Development</div></li>
-        <li><div href="#">Web Design</div></li>
-        <li><div href="#">Illustration</div></li>
-        <li><div href="#">Iconography</div></li>
-      </ul>
-    </li>
+            <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-  </ul>
-</nav>
+            <nav role="navigation" class="primary-navigation" style="height:100px; ">
+              <ul>
+                <li style="width:130px">{{ currSido.sido_name }} &dtrif;
+                  <ul class="dropdown test" style="overflow-y: scroll; height: 300px;width:100px">
+                    <li v-for="(data, idx) in sidoList" :key="idx" style="color:black; ">
+                      <div @click="gugunMethod(data, $event)">
+                        {{ data.sido_name }}
+                      </div>
+                    </li>
+                  </ul>
+                </li>
 
+                <li style="width:130px">{{ currGugun.gugun_name }} &dtrif;
+                  <ul class="dropdown test" style="overflow-y: scroll; height: 300px;width:100px">
+                    <li v-for="(data, idx) in gugunList" :key="idx" style="color:black; ">
+                      <div @click="currGugun = data">
+                        {{ data.gugun_name }}
+                      </div>
+                    </li>
+                  </ul>
+                </li>
+
+                <li style="width:130px" @click="searchLocation"> search
+                </li>
+
+
+              </ul>
+            </nav>
           </div>
+        </div>
+        <div style="height: 500px; overflow: auto">
+          <ul>
+            <li v-for="(item, index) in placeList" :key="index">
+              <div>{{ item.title }}</div>
+            </li>
+          </ul>
         </div>
 
 
       </b-tab>
-      
-      <b-tab title="키워드로 검색"
-        ><dark-main-section-4-search @location="location"></dark-main-section-4-search
-      ></b-tab>
-      
-    
+
+      <b-tab title="키워드로 검색"><dark-main-section-4-search @location="location"></dark-main-section-4-search></b-tab>
+
+
       <b-tab title="지역으로 검색" active>
         <div class="row">
           <div class="col">
-            
-<link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-<nav role="navigation" class="primary-navigation" style="height:600px; ">
-  <ul>
-    <li style="width:130px">대분류 &dtrif;
-      <ul id="test" class="dropdown" style="overflow: scroll; height: 300px;width:100px" >
-        <li  v-for="(data, idx) in sidoList"  :key="idx" style="color:black; "> 
-          <div>
-            {{ data.sido_name }}
-          </div></li>
-      </ul>
-    </li>
-    
-    <li style="width:130px">중분류 &dtrif;
-      <ul class="dropdown">
-        <li><div href="#">Web Development</div></li>
-        <li><div href="#">Web Design</div></li>
-        <li><div href="#">Illustration</div></li>
-        <li><div href="#">Iconography</div></li>
-      </ul>
-    </li>
+            <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-    <li style="width:130px">소분류 &dtrif;
-      <ul class="dropdown">
-        <li><div href="#">Web Development</div></li>
-        <li><div href="#">Web Design</div></li>
-        <li><div href="#">Illustration</div></li>
-        <li><div href="#">Iconography</div></li>
-      </ul>
-    </li>
+            <nav role="navigation" class="primary-navigation" style="height:600px; ">
+              <ul>
+                <li style="width:130px">대분류 &dtrif;
+                  <ul id="test" class="dropdown" style="overflow-y: scroll; height: 300px;width:100px">
+                    <li v-for="(data, idx) in sidoList" :key="idx" style="color:black; ">
+                      <div>
+                        {{ data.sido_name }}
+                      </div>
+                    </li>
+                  </ul>
+                </li>
 
-  </ul>
-</nav>
+                <li style="width:130px">중분류 &dtrif;
+                  <ul class="dropdown">
+                    <li>
+                      <div href="#">Web Development</div>
+                    </li>
+                    <li>
+                      <div href="#">Web Design</div>
+                    </li>
+                    <li>
+                      <div href="#">Illustration</div>
+                    </li>
+                    <li>
+                      <div href="#">Iconography</div>
+                    </li>
+                  </ul>
+                </li>
+
+                <li style="width:130px">소분류 &dtrif;
+                  <ul class="dropdown">
+                    <li>
+                      <div href="#">Web Development</div>
+                    </li>
+                    <li>
+                      <div href="#">Web Design</div>
+                    </li>
+                    <li>
+                      <div href="#">Illustration</div>
+                    </li>
+                    <li>
+                      <div href="#">Iconography</div>
+                    </li>
+                  </ul>
+                </li>
+
+              </ul>
+            </nav>
 
           </div>
         </div>
@@ -92,14 +119,24 @@
 import DarkMainSection4Search from "./DarkMainSection4Search.vue";
 import axios from "axios";
 
-const addr = "http://localhost:80/place/sido/list";
+const addr = "http://localhost:80/place/";
 export default {
   data() {
     return {
       latitude: Number,
       longitude: Number,
+      placeList: [],
       sidoList: [],
-      gugunList:[],
+      gugunList: [],
+      currSido: {
+        sido_name: '시도',
+        sido_code: 0,
+
+      },
+      currGugun: {
+        gugun_name: '구군',
+        gugun_code: 0,
+      },
     };
   },
   components: {
@@ -111,10 +148,42 @@ export default {
       this.longitude = longitude;
       this.$emit("location", this.latitude, this.longitude);
     },
+    gugunMethod(data, event) {
+      this.gugunList = [];
+      this.currGugun = {
+        gugun_name: '구군',
+        gugun_code: 0,
+      }
+      console.log(data, event.target.value);
+      this.currSido = data;
+      // axios
+      //   .get(addr + 'gugun/list')
+      //   .then((response) => {
+      //     this.sidoList = response.data;
+      //     console.log(this.sidoList);
+      //   })
+      //   .catch((error) => {
+      //     console.dir(error);
+      //   });
+
+
+    },
+    searchLocation() {
+      axios
+        .get(addr + 'search/location/' + this.currSido.sido_code + '/' + this.currGugun.gugun_code)
+        .then((response) => {
+          this.placeList = response.data;
+          this.$emit("searchLocation", this.placeList);
+          console.log(this.placeList);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+    }
   },
-  created(){
+  created() {
     axios
-      .get(addr)
+      .get(addr + 'sido/list')
       .then((response) => {
         this.sidoList = response.data;
         console.log(this.sidoList);
@@ -122,42 +191,61 @@ export default {
       .catch((error) => {
         console.dir(error);
       });
+  },
+  watch: {
+
+    currSido() {
+      axios
+        .get(addr + 'gugun/' + this.currSido.sido_code + '/list')
+        .then((response) => {
+          this.gugunList = response.data;
+          console.log(this.gugunList);
+        })
+        .catch((error) => {
+          console.dir(error);
+        });
+
+    },
+
   }
 };
 </script>
 
 <style scoped  lang="scss">
-#test {
-                width: 200px;
-                height: 400px;
-                overflow: auto;
-                color: white;
-                padding: 5px;
-            }
- 
-            #test::-webkit-scrollbar {
-                width: 20px; /*스크롤바의 너비*/
-            }
- 
-            #test::-webkit-scrollbar-thumb {
-                background-color: #0c134f; /*스크롤바의 색상*/
-                background-clip: padding-box;
-                border: 4px solid transparent;
-                border-top-left-radius: 50px;
-                border-bottom-right-radius: 50px;
-            }
- 
-            #test::-webkit-scrollbar-track {
-                background-color: grey; /*스크롤바 트랙 색상*/
-            }
+.test {
+  width: 200px;
+  height: 400px;
+  overflow: auto;
+  color: white;
+  padding: 5px;
+}
+
+.test::-webkit-scrollbar {
+  width: 15px;
+  /*스크롤바의 너비*/
+}
+
+.test::-webkit-scrollbar-thumb {
+  background-color: #0c134f;
+  /*스크롤바의 색상*/
+  background-clip: padding-box;
+  border: 4px solid transparent;
+  border-top-left-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+
+.test::-webkit-scrollbar-track {
+  background-color: grey;
+  /*스크롤바 트랙 색상*/
+}
 
 nav {
   &.primary-navigation {
     margin: 0 auto;
     display: block;
 
-  
-    padding: 20px 0 0 0;  
+
+    padding: 20px 0 0 0;
     text-align: center;
     font-size: 16px;
 
@@ -189,13 +277,13 @@ nav {
       visibility: hidden;
       opacity: 0;
       position: absolute;
-padding-left: 0;
+      padding-left: 0;
       left: 0;
       display: none;
       background: white;
     }
 
-    ul li:hover > ul,
+    ul li:hover>ul,
     ul li ul:hover {
       visibility: visible;
       opacity: 1;
@@ -224,23 +312,20 @@ padding-left: 0;
 
 a {
 
-    text-decoration: none;
+  text-decoration: none;
 
-    &:hover {
-        color: #3CA0E7;
-    }
- 
+  &:hover {
+    color: #3CA0E7;
+  }
+
 }
 
- ul li ul li div { transition: all 0.5s ease; }
+ul li ul li div {
+  transition: all 0.5s ease;
+}
 
 
 * {
   color: white;
 }
-
-
-
-
-
 </style>
