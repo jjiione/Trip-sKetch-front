@@ -59,7 +59,7 @@ export default {
     },
     searchLocation(placeList) {
       this.placeList = placeList;
-      alert(this.placeList);
+      // alert(this.placeList);
     }, 
     modaltest(modalShow) {
       this.modalShow = modalShow;

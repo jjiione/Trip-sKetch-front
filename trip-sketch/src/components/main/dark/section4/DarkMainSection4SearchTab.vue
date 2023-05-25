@@ -104,7 +104,7 @@
           <div style="height: 500px; overflow: auto">
             <ul>
               <li v-for="(item, index) in placeList" :key="index">
-                <div @click="gugunMethod(data, $event)"> {{ item.title }}</div>
+                <div @click="dataClick(item, $event)"> {{ item.title }}</div>
               </li>
             </ul>
           </div>
@@ -117,8 +117,8 @@
     <div>
     <b-button v-b-toggle.sidebar-1>Plan List</b-button>
     <b-sidebar id="sidebar-1" style="width: 400px" title="내가 담은 Place" shadow>
-      <div class="px-3 py-2" style="color:black">
-        {{ placeList }}
+      <div v-for="(data, idx) in planList" :key="idx" class="px-3 py-2" style="color:black">
+        <div style="color:black">{{ data.title }}</div>
       </div>
     </b-sidebar>
   </div>
