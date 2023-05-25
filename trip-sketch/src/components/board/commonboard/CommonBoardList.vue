@@ -47,9 +47,10 @@
 					<tr v-for="(article, idx) in articles" :key="idx">
 						<td class="num">{{ article.articleId }}</td>
 						<td class="title">
-							<router-link :to="{ name: 'boardview', params: { articleId: article.articleId } }">{{
-								article.title
-							}}</router-link>
+							<router-link
+								:to="{ name: 'commonboardview', params: { articleId: article.articleId } }"
+								>{{ article.title }}</router-link
+							>
 						</td>
 						<td class="writer">{{ article.userId }}</td>
 						<td class="date">{{ article.createtime }}</td>
@@ -109,7 +110,7 @@ export default {
 	},
 	methods: {
 		movePage() {
-			this.$router.push({ name: "boardcreate" });
+			this.$router.push({ name: "commonboardcreate" });
 		},
 		searchFilter() {
 			Swal.fire({

@@ -64,15 +64,21 @@ export default {
 	methods: {
 		moveModifyBoard() {
 			// console.log("글수정 하러가자!!!");
-			this.$router.push({ name: "boardmodify", params: { articleId: this.article.articleId } });
+			this.$router.push({
+				name: "commonboardmodify",
+				params: { articleId: this.article.articleId },
+			});
 		},
 		deleteBoard() {
 			// console.log("글삭제 하러가자!!!");
-			this.$router.push({ name: "boarddelete", params: { articleId: this.article.articleId } });
+			this.$router.push({
+				name: "commonboarddelete",
+				params: { articleId: this.article.articleId },
+			});
 		},
 		moveList() {
 			// console.log("글목록 보러가자!!!");
-			this.$router.push({ name: "boardlist" });
+			this.$router.push({ name: "commonboardlist" });
 		},
 	},
 };

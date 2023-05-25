@@ -102,11 +102,11 @@ export default {
 				content: this.article.content,
 				// fileInfos: this.article.fileInfos,
 			});
-			this.$router.push({ name: "boardlist" });
+			this.$router.push({ name: "commonboardlist" });
 		},
 
 		moveList() {
-			this.$router.push({ name: "boardlist" });
+			this.$router.push({ name: "commonboardlist" });
 		},
 	},
 	created() {

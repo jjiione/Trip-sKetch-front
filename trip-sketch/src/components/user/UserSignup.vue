@@ -10,10 +10,10 @@
 					<input
 						type="text"
 						placeholder="Username"
-						id="name"
-						name="name"
-						ref="name"
-						v-model="userInfo.name"
+						id="userName"
+						name="userName"
+						ref="userName"
+						v-model="userInfo.userName"
 						class="form-control"
 					/>
 					<i class="zmdi zmdi-account"></i>
@@ -131,7 +131,7 @@ export default {
 	data() {
 		return {
 			userInfo: {
-				name: "",
+				userName: "",
 				email: "",
 				userId: "",
 				userPwd: "",
@@ -148,8 +148,8 @@ export default {
 			// 작성자아이디, 제목, 내용이 없을 경우 각 항목에 맞는 메세지를 출력
 			let err = true;
 			let msg = "";
-			!this.userInfo.name &&
-				((msg = "이름을 입력해주세요"), (err = false), this.$refs.name.focus());
+			!this.userInfo.userName &&
+				((msg = "이름을 입력해주세요"), (err = false), this.$refs.userName.focus());
 			err &&
 				!this.userInfo.email &&
 				((msg = "이메일을 입력해주세요"), (err = false), this.$refs.email.focus());
@@ -193,7 +193,7 @@ export default {
 		async registUser() {
 			// 비동기
 			await axios.post(url + "regist", {
-				name: this.userInfo.name,
+				userName: this.userInfo.userName,
 				email: this.userInfo.email,
 				userId: this.userInfo.userId,
 				userPwd: this.userInfo.userPwd,

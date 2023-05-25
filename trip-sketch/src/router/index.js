@@ -92,9 +92,9 @@ const routes = [
 				component: BoardDelete,
 			},
 			{
-				path: "/common",
+				path: "common",
 				name: "commonboard",
-				component: CommonBoardList,
+				component: TheBoard,
 				redirect: "/common/list",
 				children: [
 					{

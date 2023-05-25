@@ -16,6 +16,58 @@
 								class="form-control w-100"
 								id="name"
 								aria-describedby="emailHelp"
+								v-model="user.userName"
+							/>
+						</dd>
+					</dl>
+				</div>
+				<div class="form-group">
+					<dl>
+						<dt>
+							<label for="name" class="form-label">아이디</label>
+						</dt>
+						<dd>
+							<input
+								type="text"
+								class="form-control w-100"
+								id="name"
+								aria-describedby="emailHelp"
+								v-model="user.userId"
+							/>
+						</dd>
+					</dl>
+				</div>
+				<div class="form-group">
+					<dl>
+						<dt>
+							<label class="form-label" for="userPwd">비밀번호</label>
+						</dt>
+						<dd>
+							<input
+								type="password"
+								class="form-control is-valid w-100"
+								id="userPwd"
+								name="userPwd"
+								v-model="user.userPwd"
+								@blur="pwdCheck"
+							/>
+						</dd>
+					</dl>
+				</div>
+
+				<div class="form-group">
+					<dl>
+						<dt>
+							<label class="form-label" for="confirmPwd">비밀번호 재확인</label>
+						</dt>
+						<dd>
+							<input
+								type="password"
+								class="form-control is-invalid w-100"
+								id="confirmPwd"
+								name="confirmPwd"
+								v-model="confirmPwd"
+								@blur="pwdConfirmCheck"
 							/>
 						</dd>
 					</dl>
@@ -31,32 +83,12 @@
 								class="form-control w-100"
 								id="exampleInputEmail"
 								aria-describedby="emailHelp"
+								v-model="user.email"
 							/>
 						</dd>
 					</dl>
 				</div>
-				<div class="form-group has-success">
-					<dl>
-						<dt>
-							<label class="form-label" for="inputValid">비밀번호</label>
-						</dt>
-						<dd>
-							<input type="password" class="form-control is-valid w-100" id="inputValid" />
-						</dd>
-					</dl>
-				</div>
-
-				<div class="form-group has-danger">
-					<dl>
-						<dt>
-							<label class="form-label" for="inputInvalid">비밀번호 재확인</label>
-						</dt>
-						<dd>
-							<input type="password" class="form-control is-invalid w-100" id="inputInvalid" />
-						</dd>
-					</dl>
-				</div>
-				<div class="bir_wrap">
+				<!-- <div class="bir_wrap">
 					<dl>
 						<dt>
 							<label class="form-label">생년월일</label>
@@ -99,14 +131,14 @@
 							</div>
 						</dd>
 					</dl>
-				</div>
-				<div class="form-group">
+				</div> -->
+				<div class="">
 					<dl>
 						<dt>
 							<label for="exampleSelect1" class="form-label">비밀번호 확인 질문</label>
 						</dt>
 						<dd>
-							<select class="form-control" id="exampleSelect1">
+							<select class="form-control" id="exampleSelect1" v-model="user.question">
 								<option value="" disabled selected>비밀번호 확인 질문을 선택하세요</option>
 								<option value="기억에 남는 추억의 장소는?">기억에 남는 추억의 장소는?</option>
 								<option value="자신의 인생 좌우명은?">자신의 인생 좌우명은?</option>
@@ -141,6 +173,7 @@
 								class="form-control w-100"
 								id=""
 								placeholder="비밀번호 확인 질문 답변"
+								v-model="user.answer"
 							/>
 						</dd>
 					</dl>
@@ -150,6 +183,7 @@
 						class="btn btn-primary btn-lg"
 						type="button"
 						style="background-color: cornflowerblue"
+						@click="modify"
 					>
 						수정하기
 					</button>
@@ -166,9 +200,81 @@
 	</section>
 </template>
 
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+import { mapState } from "vuex";
+import axios from "axios";
+const memberStore = "memberStore";
+const url = "http://localhost:80/mypage/userinfo";
 export default {
 	name: "UserInfo",
+	data() {
+		return {
+			user: Object,
+			confirmPwd: "",
+		};
+	},
+	computed: {
+		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
+	},
+	created() {
+		this.user = this.userInfo;
+		this.confirmPwd = this.userInfo.userPwd;
+	},
+	methods: {
+		async modify() {
+			// 비동기
+			await axios.put(url, {
+				userName: this.user.userName,
+				email: this.user.email,
+				userId: this.user.userId,
+				userPwd: this.user.userPwd,
+				answer: this.userInfo.answer,
+				question: this.userInfo.question,
+			});
+			// this.$router.push({ name: "MainPage" });
+			const Toast = Swal.mixin({
+				toast: true,
+				position: "center-center",
+				showConfirmButton: false,
+				timer: 3000,
+				timerProgressBar: true,
+				didOpen: (toast) => {
+					toast.addEventListener("mouseenter", Swal.stopTimer);
+					toast.addEventListener("mouseleave", Swal.resumeTimer);
+				},
+			});
+
+			Toast.fire({
+				icon: "success",
+				title: "회원 정보 수정 완료",
+				timer: 1300,
+				position: "center",
+			});
+		},
+		pwdCheck() {
+			if (document.querySelector("#userPwd").value.length < 8) {
+				alert("비밀번호를 8자리 이상 입력하세요.");
+				return;
+			}
+			//비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
+			var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+
+			if (!pwdCheck.test(confirmPwd)) {
+				alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+				return false;
+			}
+		},
+		pwdConfirmCheck() {
+			let err = true;
+			let msg = "";
+			var confirmPwd = document.querySelector("#confirmPwd").value;
+			if (confirmPwd == document.querySelector("#userPwd").value) {
+				(msg = "비밀번호가 일치하지 않습니다."), (err = false);
+			}
+			if (!err) alert(msg);
+		},
+	},
 };
 </script>
 <style scoped>

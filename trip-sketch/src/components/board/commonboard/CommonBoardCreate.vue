@@ -96,11 +96,11 @@ export default {
 				userId: this.article.userId,
 				// fileInfos: this.article.fileInfos,
 			});
-			this.$router.push({ name: "boardlist" });
+			this.$router.push({ name: "commonboardlist" });
 		},
 
 		moveList() {
-			this.$router.push({ name: "boardlist" });
+			this.$router.push({ name: "commonboardlist" });
 		},
 	},
 };
