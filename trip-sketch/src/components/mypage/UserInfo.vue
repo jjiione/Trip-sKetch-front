@@ -34,6 +34,7 @@
                 id="userId"
                 aria-describedby="emailHelp"
                 v-model="user.userId"
+                readonly
                 ref="userId"
               />
             </dd>
