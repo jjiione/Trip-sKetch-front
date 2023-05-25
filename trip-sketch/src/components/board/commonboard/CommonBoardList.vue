@@ -18,11 +18,11 @@
         type="button"
         class="btn btn-outline-secondary"
         id="btn-search-keyword"
-        @click="searchBoard"
+        @click="resetBoard"
         style="text-decoration: none; height: min-content"
         v-if="articles.length"
       >
-        글 검색
+        초기화
       </button>
     </div>
     <div class="board_list_wrap" v-if="articles.length">
@@ -233,7 +233,11 @@ export default {
         }
       });
     },
-    searchBoard() {},
+    resetBoard() {
+      axios.get(url).then((response) => {
+        this.articles = response.data;
+      });
+    },
   },
 };
 </script>

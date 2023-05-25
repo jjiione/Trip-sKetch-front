@@ -26,6 +26,14 @@
               <dt>조회수</dt>
               <dd>{{ article.hit }}</dd>
             </dl>
+            <div>
+              <dl>
+                <dt>파일 첨부</dt>
+                <dd>
+                  <a :href="article.img">{{ article.img }}</a>
+                </dd>
+              </dl>
+            </div>
           </div>
           <div class="cont">
             <p style="white-space: pre-line">{{ article.content }}</p>

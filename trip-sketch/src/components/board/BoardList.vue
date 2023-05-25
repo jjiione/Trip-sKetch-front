@@ -18,11 +18,11 @@
         type="button"
         class="btn btn-outline-secondary"
         id="btn-search-keyword"
-        @click="searchBoard"
+        @click="resetBoard"
         style="text-decoration: none; height: min-content"
         v-if="articles.length"
       >
-        글 검색
+        초기화
       </button>
     </div>
     <div class="board_list_wrap" v-if="articles.length">
@@ -62,7 +62,7 @@
         <a href="#" class="bt first">&lt;&lt;</a>
         <a href="#" class="bt prev">&lt;</a>
         <a href="#" class="num on">1</a>
-        <a href="#" class="num">2</a>
+        <!-- <a href="#" class="num">2</a> -->
         <a href="#" class="bt next">></a>
         <a href="#" class="bt last">>></a>
       </div>
@@ -87,6 +87,9 @@ export default {
       articles: [],
       navigation: Object,
       authorization: "",
+      searchTitle: "",
+      searchUserId: "",
+      searchContent: "",
     };
   },
   computed: {
@@ -124,8 +127,8 @@ export default {
         html:
           `<form>` +
           '<input id="swal-input1" class="swal2-input" placeholder="제목을 입력해주세요">' +
-          '<input id="swal-input1" class="swal2-input" placeholder="작성자를 입력해주세요">' +
-          '<input id="swal-input2" class="swal2-input"  placeholder="글내용을 입력해주세요">' +
+          '<input id="swal-input2" class="swal2-input" placeholder="작성자를 입력해주세요">' +
+          '<input id="swal-input3" class="swal2-input"  placeholder="글내용을 입력해주세요">' +
           `</form>`,
         // input: "text",
         inputAttributes: {
@@ -134,21 +137,37 @@ export default {
         showCancelButton: true,
         confirmButtonText: "Look up",
         showLoaderOnConfirm: true,
-        preConfirm: (login) => {
-          return fetch(`//api.github.com/users/${login}`)
-            .then((response) => {
-              if (!response.ok) {
-                throw new Error(response.statusText);
-              }
-              return response.json();
-            })
-            .catch((error) => {
-              Swal.showValidationMessage(`Request failed: ${error}`);
-            });
+        preConfirm: () => {
+          // preConfirm: (login) => {
+          // return fetch(`//api.github.com/users/${login}`)
+          // 	.then((response) => {
+          // 		if (!response.ok) {
+          // 			throw new Error(response.statusText);
+          // 		}
+          // 		return response.json();
+          // 	})
+          // 	.catch((error) => {
+          // 		Swal.showValidationMessage(`Request failed: ${error}`);
+          // 	});
         },
         allowOutsideClick: () => !Swal.isLoading(),
       }).then((result) => {
         if (result.isConfirmed) {
+          let key = new Array();
+          this.searchTitle = document.querySelector("#swal-input1").value;
+          this.searchUserId = document.querySelector("#swal-input2").value;
+          this.searchContent = document.querySelector("#swal-input3").value;
+          this.articles.forEach((element) => {
+            if (
+              element.title.indexOf(this.searchTitle) == 0 &&
+              element.userId.indexOf(this.searchUserId) == 0 &&
+              element.content.indexOf(this.searchContent) == 0
+            ) {
+              console.log(element);
+              key.push(element);
+            }
+          });
+          this.articles = key;
           // const Toast = Swal.mixin({
           //   toast: true,
           //   position: "center-center",
@@ -160,19 +179,22 @@ export default {
           //     toast.addEventListener("mouseleave", Swal.resumeTimer);
           //   },
           // });
-
           // Toast.fire({
           //   icon: "success",
           //   title: "검색 조건이 정상적으로 설정되었습니다.",
           // });
-          Swal.fire({
-            title: `${result.value.login}'s avatar`,
-            imageUrl: result.value.avatar_url,
-          });
+          // Swal.fire({
+          // 	title: `${result.value.login}'s avatar`,
+          // 	imageUrl: result.value.avatar_url,
+          // });
         }
       });
     },
-    searchBoard() {},
+    resetBoard() {
+      axios.get(url).then((response) => {
+        this.articles = response.data;
+      });
+    },
   },
 };
 </script>

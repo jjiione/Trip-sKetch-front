@@ -29,13 +29,14 @@
             <dl>
               <dt>파일 첨부</dt>
               <dd>
-                <input
+                <a :href="article.img">{{ article.img }}</a>
+                <!-- <input
                   type="text"
                   name="fileInfos"
                   id="fileInfos"
                   v-model="article.fileInfos"
                   ref="fileInfos"
-                />
+                /> -->
               </dd>
             </dl>
           </div>

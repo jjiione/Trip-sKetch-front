@@ -112,7 +112,7 @@ export default {
         title: this.article.title,
         content: this.article.content,
         userId: this.article.userId,
-        img: "ap-northeast-2:fdcfec3c-d67d-4491-ac5e-1f9ba8ad1777" + this.file.name,
+        img: "https://trips-ketch.s3.ap-northeast-2.amazonaws.com/" + this.file.name,
         // fileInfos: this.article.fileInfos,
       });
       this.$router.push({ name: "commonboardlist" });
