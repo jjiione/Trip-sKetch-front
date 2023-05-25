@@ -2,8 +2,8 @@
   <div>
     <b-tabs content-class="mt-3" fill>
       <b-tab title="지역으로 검색" active>
-        <div class="row">
-          <div class="col">
+        <div class="row flex-wrap">
+          <div class="d-block">
 
             <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
@@ -36,7 +36,7 @@
               </ul>
             </nav>
           </div>
-          <div style="height: 500px; overflow: auto">
+          <div style="height: 500px; overflow: auto" class="d-block">
             <ul>
               <li v-for="(item, index) in placeList" :key="index">
                 <div @click="gugunMethod(data, $event)"> {{ item.title }}</div>
@@ -56,12 +56,12 @@
 
 
       <b-tab title="카테고리로 검색" active>
-        <div class="row">
-          <div class="col">
+        <div class="row flex-wrap">
+          <div class="d-block">
 
             <link href="https://fonts.googleapis.com/css?family=Arvo&display=swap" rel="stylesheet">
 
-            <nav role="navigation" class="primary-navigation d-block" style="height:600px; ">
+            <nav role="navigation" class="primary-navigation d-block">
               <ul>
                 <li style="width:120px; font-size:13px">{{ currCat1.category_name }} &dtrif;
                   <ul class="dropdown test" style="overflow-y: scroll; height: 300px;width:100px">

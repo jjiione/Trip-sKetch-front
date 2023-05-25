@@ -99,6 +99,12 @@ export default {
           // title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           //   image: markerImage, // 마커의 이미지
         });
+
+        // 마커에 클릭이벤트를 등록합니다
+        kakao.maps.event.addListener(marker, 'click', function () {
+          // 마커 위에 인포윈도우를 표시합니다
+          alert("push");
+        });
         this.markers.push(marker);
         marker.setMap(this.map);
       });
