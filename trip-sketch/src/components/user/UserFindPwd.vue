@@ -13,7 +13,7 @@
 
 				<div class="form-floating">
 					<input
-						type="email"
+						type="text"
 						class="form-control"
 						id="userId"
 						v-model="userinfo.userId"
@@ -193,6 +193,8 @@
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
+const url = "http://localhost:80/user/";
+import axios from "axios";
 export default {
 	name: "UserFindPwd",
 	data() {
@@ -204,6 +206,7 @@ export default {
 				question: "",
 				answer: "",
 			},
+			user: Object,
 			initFlag: Boolean,
 			IdNotFoundflag: Boolean,
 		};
@@ -214,11 +217,19 @@ export default {
 		this.questionError = true;
 	},
 	methods: {
-		next() {
+		async next() {
+			await axios.get(url + "find-password/" + this.userinfo.userId).then((response) => {
+				this.user = response.data;
+			});
+			if (!this.user.userId) {
+				alert("아이디를 확인해주세요!!");
+				return;
+			}
 			// 사용자 입력값 체크하기
 			// 작성자아이디, 제목, 내용이 없을 경우 각 항목에 맞는 메세지를 출력
 			let err = true;
 			let msg = "";
+
 			!this.userinfo.userId &&
 				((msg = "아이디를 입력해주세요"), (err = false), this.$refs.userId.focus());
 			if (!err)
@@ -233,14 +244,21 @@ export default {
 		findQuestion() {
 			// 비동기
 			// TODO : 글번호에 해당하는 글정보 등록.
-			let userinfo = new Array();
-			if (localStorage.userinfo) userinfo = JSON.parse(localStorage.userinfo);
-			userinfo.push(this.userinfo);
-			localStorage.setItem("userinfo", JSON.stringify(userinfo));
+			// let userinfo = new Array();
+			// if (localStorage.userinfo) userinfo = JSON.parse(localStorage.userinfo);
+			// userinfo.push(this.userinfo);
+			// localStorage.setItem("userinfo", JSON.stringify(userinfo));
 			this.initFlag = false;
 			this.IdNotFoundflag = false;
 		},
 		checkQuestion() {
+			if (
+				this.userinfo.question != this.user.question ||
+				this.userinfo.answer != this.user.answer
+			) {
+				alert("비밀번호 질문 및 답변을 확인해주세요!!");
+				return;
+			}
 			// 사용자 입력값 체크하기
 			// 작성자아이디, 제목, 내용이 없을 경우 각 항목에 맞는 메세지를 출력
 			let err = true;
@@ -269,7 +287,7 @@ export default {
 			this.IdNotFoundflag = true;
 			this.questionError = false;
 		},
-		resetpwd() {
+		async resetpwd() {
 			let err = true;
 			let msg = "";
 			!this.userinfo.userPwd &&
@@ -285,6 +303,22 @@ export default {
 					// footer: '<a href="">Why do I have this issue?</a>',
 				});
 			else {
+				if (this.userinfo.userPwd.length < 8) {
+					alert("비밀번호를 8자리 이상 입력하세요.");
+					return;
+				}
+				//비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
+				var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
+
+				if (!pwdCheck.test(this.userinfo.userPwd)) {
+					alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
+					return false;
+				}
+				if (this.userinfo.userPwd != this.userinfo.newUserPwd) {
+					alert("비밀번호가 일치하지 않습니다");
+					return;
+				}
+
 				Swal.fire({
 					title: "정말로 그렇게 하시겠습니까?",
 					text: "다시 되돌릴 수 없습니다. 신중하세요.",
@@ -297,9 +331,18 @@ export default {
 					cancelButtonText: "취소", // cancel 버튼 텍스트 지정
 
 					reverseButtons: true, // 버튼 순서 거꾸로
-				}).then((result) => {
+				}).then(async (result) => {
 					// 만약 Promise리턴을 받으면,
 					if (result.isConfirmed) {
+						await axios.put(url + "modify-password", {
+							userName: this.user.userName,
+							email: this.user.email,
+							userId: this.userinfo.userId,
+							userPwd: this.userinfo.userPwd,
+							answer: this.user.answer,
+							question: this.user.question,
+						});
+
 						// 만약 모달창에서 confirm 버튼을 눌렀다면
 
 						Swal.fire("승인이 완료되었습니다.", "", "success");
