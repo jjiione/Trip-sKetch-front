@@ -22,7 +22,11 @@
 									>공지 사항</router-link
 								>
 							</b-dropdown-item>
-							<b-dropdown-item>자유 게시판</b-dropdown-item>
+							<b-dropdown-item>
+								<router-link :to="{ name: 'commonboardlist' }" style="color: black"
+									>자유 게시판</router-link
+								></b-dropdown-item
+							>
 						</b-nav-item-dropdown>
 					</b-navbar-nav>
 

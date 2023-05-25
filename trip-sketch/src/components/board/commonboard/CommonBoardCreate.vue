@@ -47,9 +47,9 @@
 
 <script>
 import axios from "axios";
-const url = "http://localhost:80/board/notice/regist";
+const url = "http://localhost:80/board/common/regist";
 export default {
-	name: "BoardCreate",
+	name: "CommonBoardCreate",
 	data() {
 		return {
 			article: {
