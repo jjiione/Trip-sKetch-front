@@ -1,35 +1,18 @@
 <template>
   <div>
     <b-form inline>
-      <b-form-input
-        style="color: black"
-        v-model="query"
-        id="inline-form-input-name"
-        class="mb-2 mr-sm-2 mb-sm-0"
-        placeholder="검색어를 입력하세요"
-      ></b-form-input>
+      <b-form-input style="color: black" v-model="query" id="inline-form-input-name" class="mb-2 mr-sm-2 mb-sm-0"
+        placeholder="검색어를 입력하세요"></b-form-input>
 
       <!-- <b-button >Save</b-button> -->
-      <dark-main-section-4-submit-button
-        :keyword="query"
-        @checkit="checkit"
-      ></dark-main-section-4-submit-button>
+      <dark-main-section-4-submit-button :keyword="query" @checkit="checkit"></dark-main-section-4-submit-button>
     </b-form>
-    <TransitionGroup
-      tag="ul"
-      :css="false"
-      @before-enter="onBeforeEnter"
-      @enter="onEnter"
-      @leave="onLeave"
-    >
+    <TransitionGroup tag="ul" :css="false" @before-enter="onBeforeEnter" @enter="onEnter" @leave="onLeave">
       <li v-for="(item, index) in computedList" :key="item.msg" :data-index="index">
         {{ item.msg }}
       </li>
     </TransitionGroup>
-    <dark-main-section-4-list
-      @location="location"
-      :placeList="placeList"
-    ></dark-main-section-4-list>
+    <dark-main-section-4-list @location="location" :placeList="placeList"></dark-main-section-4-list>
   </div>
 </template>
 
@@ -91,6 +74,7 @@ export default {
       this.$emit("location", this.latitude, this.longitude);
     },
   },
+
 };
 </script>
 

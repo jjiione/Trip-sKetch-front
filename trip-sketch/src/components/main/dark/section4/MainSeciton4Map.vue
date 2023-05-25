@@ -16,6 +16,7 @@ export default {
   props: {
     latitude: Number,
     longitude: Number,
+    placeList: [],
   },
   watch: {
     latitude() {
@@ -30,8 +31,21 @@ export default {
 
       this.loadMaker();
     },
+    placeList() {
+      this.positions = [];
+
+      for (var i = 0; i < this.placeList.length; i++) {
+        let obj = {};
+        console.log(this.placeList[i].latitude, this.placeList[i].longitude);
+        obj.latlng = new kakao.maps.LatLng(this.placeList[i].latitude, this.placeList[i].longitude);
+        this.positions.push(obj);
+      }
+      console.log("marker" + JSON.stringify(this.positions));
+
+      this.loadMaker();
+    }
   },
-  created() {},
+  created() { },
   mounted() {
     // api 스크립트 소스 불러오기 및 지도 출력
     if (window.kakao && window.kakao.maps) {
@@ -85,7 +99,14 @@ export default {
           // title: position.title, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
           //   image: markerImage, // 마커의 이미지
         });
+
+        // 마커에 클릭이벤트를 등록합니다
+        kakao.maps.event.addListener(marker, 'click', function () {
+          // 마커 위에 인포윈도우를 표시합니다
+          alert("push");
+        });
         this.markers.push(marker);
+        marker.setMap(this.map);
       });
       console.log("마커수 ::: " + this.markers.length);
 

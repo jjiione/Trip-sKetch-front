@@ -2,28 +2,26 @@
 	<div class="wrapper">
 		<div class="inner" style="rgb: (255, 255, 255, 1)">
 			<div v-if="reviewImg" class="image-holder">
-				<img :src="img" alt="" style="height:500px; width:450px"/>
+				<img :src="img" alt="" style="height:500px; width:450px" />
 			</div>
 			<div v-else>
-				<img src="@/assets/testplace1.jpg" alt="" style="height:500px; width:450px"/>
+				<img src="@/assets/testplace1.jpg" alt="" style="height:500px; width:450px" />
 			</div>
 			<form action="" @submit.prevent="onSubmit">
 				<h3 style="color: black">Review 작성하기</h3>
 				<div class="form-wrapper">
 					<!-- userId 수정 필요 -->
-					<input type="text" id="name" name="name" ref="name" v-model="tmpUserId"
-						class="form-control" />
+					<input type="text" id="name" name="name" ref="name" v-model="reviewUserId" class="form-control" />
 					<i class="zmdi zmdi-account"></i>
 				</div>
 				<div class="form-wrapper">
-					<input type="text" id="email" name="title" ref="email"
-						v-model="reviewTitle" class="form-control" />
+					<input type="text" id="email" name="title" ref="email" v-model="reviewTitle" class="form-control" />
 					<i class="zmdi zmdi-email"></i>
 				</div>
 
 				<div class="form-wrapper">
-					<input type="number" id="rate" name="rate" ref="email"
-						v-model="reviewRate" class="form-control" />
+					<input type="text" id="rate" placeholder="평점을 입력하세요" name="rate" ref="email" v-model="reviewRate"
+						class="form-control" />
 					<i class="zmdi zmdi-account-box"></i>
 				</div>
 
@@ -49,17 +47,19 @@ export default {
 	name: "UserSignup",
 	data() {
 		return {
-			tmpUserId: 'SSAFY',
+			reviewUserId: 'SSAFY',
 			reviewImg: String,
 			reviewTitle: String,
 			reviewContent: "",
-			reviewRate : Number,
+			reviewRate: "",
+			reviewContentId: Number,
 		};
 	},
 	props: {
 		img: String,
 		contentId: Number,
-		title: String
+		title: String,
+		userId: String,
 	},
 	computed: {
 		...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
@@ -82,17 +82,17 @@ export default {
 			sessionStorage.removeItem("refresh-token"); //저장된 토큰 없애기
 			if (this.$route.path != "/") this.$router.push({ name: "MainPage" });
 		},
-		register() {
-			console.log(this.contentId, this.reviewContent);
+		async register() {
+			console.log(this.reviewContentId, this.reviewContent);
 			// 비동기
-			axios.post(url, {
-				placeId: this.contentId,
-				userId: this.tmpUserId,
+			await axios.post(url, {
+				placeId: this.reviewContentId,
+				userId: this.reviewUserId,
 				content: this.reviewContent,
-				rate : this.reviewRate
+				rate: this.reviewRate
 			});
 			this.$router.push({ name: "MainPage" });
-		
+
 		}
 	},
 	created() {
@@ -100,11 +100,13 @@ export default {
 		if (this.userInfo) console.log('userinfo' + this.userInfo.userId);
 		this.reviewImg = this.img;
 		this.reviewTitle = this.title;
-	
+		this.reviewUserId = this.userId;
+		this.reviewContentId = this.contentId;
+
 		console.log(this.reviewTitle);
 
 	},
-	
+
 };
 </script>
 
