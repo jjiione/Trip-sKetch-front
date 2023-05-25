@@ -19,9 +19,9 @@
             <div>휴무일 : {{ detail.restdate }}</div>
             <div class="button_base_in b11_3d_jumpback" style="margin-top: 10px" data-target="#myModal">
                 <router-link :to="{
-                     name: 'write',
-                     params:{img: imgList[0], contentId: detail.contentid, title : place.title}
-                     }" style="color: white">
+                    name: 'write',
+                    params: { img: imgList[0], contentId: detail.contentid, title: place.title }
+                }" style="color: white">
                     <div>Review 작성</div>
                 </router-link>
 
