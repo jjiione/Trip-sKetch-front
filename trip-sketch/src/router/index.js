@@ -23,7 +23,7 @@ import UserSignup from "@/components/user/UserSignup";
 import UserFindPwd from "@/components/user/UserFindPwd";
 import UserInfo from "@/components/mypage/UserInfo";
 import MyPlans from "@/components/mypage/MyPlans";
-import MyReviews from "@/components/mypage/MyReviews";
+import MyReview from "@/components/mypage/MyReview";
 import GoogleTest from "@/components/testtest/GoogleTest";
 import ReviewWrite from "@/components/myreviews/ReviewWrite";
 
@@ -177,7 +177,7 @@ const routes = [
 			{
 				path: "myreviews",
 				name: "myreviews",
-				component: MyReviews,
+				component: MyReview,
 			},
 			{
 				path: "google",

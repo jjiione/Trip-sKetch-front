@@ -30,23 +30,27 @@
   <script>
   import axios from "axios";
   import sal from "sal.js";
-  import DarkMainSection3Review from "./DarkMainSection3Review.vue";
-  const detailaddr = "http://localhost:80/place/review/current/list";
+  import { mapState } from "vuex";
+const memberStore = "memberStore";
+  import DarkMainSection3Review from "../main/dark/section3/DarkMainSection3Review.vue";
+  const detailaddr = "http://localhost:80/place/myreview/";
   
   export default {
-    name: "section-3",
+    name: "MyReview",
     components: {
       DarkMainSection3Review,
     },
     data() {
       return {
         reviewList: [],
+        user: Object,
       };
     },
     created() {
+      this.user = this.userInfo;
       sal();
       axios
-        .get(detailaddr)
+        .get(detailaddr + this.user.userId)
         .then((response) => {
           this.reviewList = response.data;
           console.log(this.reviewList);
@@ -54,6 +58,11 @@
         .catch((error) => {
           console.dir(error);
         });
+
+        
+    },
+    computed: {
+        ...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
     },
     mounted() {
       sal();
