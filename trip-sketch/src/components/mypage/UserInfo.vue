@@ -67,7 +67,6 @@
 								id="confirmPwd"
 								name="confirmPwd"
 								v-model="confirmPwd"
-								@blur="pwdConfirmCheck"
 							/>
 						</dd>
 					</dl>
@@ -223,6 +222,10 @@ export default {
 	},
 	methods: {
 		async modify() {
+			if (this.confirmPwd != this.user.userPwd) {
+				alert("비밀번호가 일치하지 않습니다.");
+				return;
+			}
 			// 비동기
 			await axios.put(url, {
 				userName: this.user.userName,
@@ -253,26 +256,17 @@ export default {
 			});
 		},
 		pwdCheck() {
-			if (document.querySelector("#userPwd").value.length < 8) {
+			if (this.user.userPwd.length < 8) {
 				alert("비밀번호를 8자리 이상 입력하세요.");
 				return;
 			}
 			//비밀번호 영문자+숫자+특수조합(8~25자리 입력) 정규식
 			var pwdCheck = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/;
 
-			if (!pwdCheck.test(confirmPwd)) {
+			if (!pwdCheck.test(this.user.userPwd)) {
 				alert("비밀번호는 영문자+숫자+특수문자 조합으로 8~25자리 사용해야 합니다.");
 				return false;
 			}
-		},
-		pwdConfirmCheck() {
-			let err = true;
-			let msg = "";
-			var confirmPwd = document.querySelector("#confirmPwd").value;
-			if (confirmPwd == document.querySelector("#userPwd").value) {
-				(msg = "비밀번호가 일치하지 않습니다."), (err = false);
-			}
-			if (!err) alert(msg);
 		},
 	},
 };
