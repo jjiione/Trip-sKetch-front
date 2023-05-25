@@ -12,6 +12,11 @@ import BoardCreate from "@/components/board/BoardCreate";
 import BoardModify from "@/components/board/BoardModify";
 import BoardView from "@/components/board/BoardView";
 import BoardDelete from "@/components/board/BoardDelete";
+import CommonBoardList from "@/components/board/commonboard/CommonBoardList";
+import CommonBoardCreate from "@/components/board/commonboard/CommonBoardCreate";
+import CommonBoardModify from "@/components/board/commonboard/CommonBoardModify";
+import CommonBoardView from "@/components/board/commonboard/CommonBoardView";
+import CommonBoardDelete from "@/components/board/commonboard/CommonBoardDelete";
 import UserLogin from "@/components/user/UserLogin";
 import UserLogout from "@/components/user/UserLogout";
 import UserSignup from "@/components/user/UserSignup";
@@ -86,6 +91,42 @@ const routes = [
 				beforeEnter: onlyAuthUser,
 				component: BoardDelete,
 			},
+			{
+				path: "/common",
+				name: "commonboard",
+				component: CommonBoardList,
+				redirect: "/common/list",
+				children: [
+					{
+						path: "list",
+						name: "commonboardlist",
+						component: CommonBoardList,
+					},
+					{
+						path: "create",
+						name: "commonboardcreate",
+						beforeEnter: onlyAuthUser,
+						component: CommonBoardCreate,
+					},
+					{
+						path: "view",
+						name: "commonboardview",
+						component: CommonBoardView,
+					},
+					{
+						path: "modify",
+						name: "commonboardmodify",
+						beforeEnter: onlyAuthUser,
+						component: CommonBoardModify,
+					},
+					{
+						path: "delete",
+						name: "commonboarddelete",
+						beforeEnter: onlyAuthUser,
+						component: CommonBoardDelete,
+					},
+				],
+			},
 		],
 	},
 	{
@@ -155,10 +196,9 @@ const routes = [
 				path: "write",
 				name: "write",
 				component: ReviewWrite,
-				props:true,
-			}
-		]
-		
+				props: true,
+			},
+		],
 	},
 ];
 
