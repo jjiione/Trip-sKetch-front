@@ -13,37 +13,21 @@
         </div>
 
         <div style="margin-top : 20px">
-            <div v-if="ismodify">
-                <div style="overflow-y: scroll; height: 150px; text-align: center;">
+            <div style="overflow-y: scroll; height: 150px; text-align: center;">
                 <div>여행지 : {{ place.title }}</div>
-            <div>시도 : {{ place.sidoName }}</div>
-            <div>구군 : {{ place.gugunName }}</div>
+            <div>시도 : {{ place.sido_name }}</div>
+            <div>구군 : {{ place.gugun_name }}</div>
             <div>여행지 가이드 : {{ detail.expguide }}</div>
             <div>휴무일 : {{ detail.restdate }}</div>
-                   
-            </div>   
+
             </div>
-            <input type="text">
-
-            <!-- <div v-if="!ismodify">
-                <div style="overflow-y: scroll; height: 150px; text-align: center;">
-            <input type="text" placeholder="여행지 : " v-model="place.title">
-            <input type="text" placeholder="시도 : " v-model="place.sidoName">
-            <input type="text" placeholder="구군 : " v-model="place.gugunName">
-            <input type="text" placeholder="여행지 가이드 : " v-model="detail.expguide">
-            <input type="text" placeholder="휴무일 : " v-model="detail.restdate"> 
-            <button @click="post">change</button>   
-            </div>   
-            </div> -->
-
-            
             
             <div class="row justify-content-around" style="margin-top: -30px; margin-bottom: 50px;">
                 <div class="btn-base-in text-center b11_3d_jumpback" style="margin-top: 10px; margin-right:0px"
                     data-target="#myModal">
                     <router-link :to="{
                         name: 'write',
-                        params: { img: imgList[0], contentId: place.contentId, title: place.title, userId: user.userId }
+                        params: { img: imgList[0], contentId: place.content_id, title: place.title, userId: user.userId }
                     }" style="color: white">
                         <div>Review 작성</div>
                     </router-link>
@@ -51,7 +35,22 @@
 
                 <div class="btn-base-in text-center b11_3d_jumpback" style="margin-top: 10px; margin-right:10px"
                     data-target="#myModal">
-                        <div @click="!ismodify">정보 수정</div>
+                    <router-link :to="{
+                        name: 'write',
+                        params: { img: imgList[0], contentId: place.content_id, title: place.title, userId: user.userId }
+                    }" style="color: white">
+                        <div>Review 더보기</div>
+                    </router-link>
+                </div>
+
+                <div class="btn-base-in text-center b11_3d_jumpback" style="margin-top: 10px; margin-right:10px"
+                    data-target="#myModal">
+                    <router-link :to="{
+                        name: 'write',
+                        params: { img: imgList[0], contentId: contentId, title: place.title, userId: user.userId }
+                    }" style="color: white">
+                        <div>정보 수정</div>
+                    </router-link>
                 </div>
 
             </div>
@@ -71,11 +70,7 @@ export default {
         return {
             imgList: [],
             user: Object,
-            ismodify: false,
-        };
-    },
-    props: {
-        detail: {
+            detail: {
             contentid: Number,
             contenttypeid: String,
             heritage1: String,
@@ -94,31 +89,37 @@ export default {
             chkpet: String,
             chkcreditcard: String,
         },
-        place: {
-            gugunName: String,
-            sidoName: String,
-            title: String,
-            contentId: Number,
+            place: {
+                gugun_name: String,
+                sido_name: String,
+                title: String,
+            content_id : Number,
         },
+            
+        };
+    },
+    props: {
+        contentId:Number,
     },
     async created() {
+        
         var list1 = [];
         var list2 = [];
         await axios
-            .get(addr + this.place.contentId + '/images')
+            .get(addr + this.contentId + '/images')
             .then((response) => {
                 list1 = response.data;
-                console.log(list1);
+                // console.log(list1);
             })
             .catch((error) => {
                 console.dir(error);
             });
 
             await axios
-            .get(addr + this.place.contentId + '/images/reivew')
+            .get(addr + this.contentId + '/images/review')
             .then((response) => {
                 list2 = response.data;
-                console.log(list2);
+                // console.log(list2);
             })
             .catch((error) => {
                 console.dir(error);
@@ -129,33 +130,41 @@ export default {
             ...list2
         ]
 
+        axios
+      .get(addr + this.contentId + "/detail")
+      .then((response) => {
+        this.detail = response.data;
+        console.log('detail' + this.detail);
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+
+      axios
+      .get(addr + '/search/' + this.contentId + "/place")
+          .then((response) => {
+              console.log('response place' + response.data + response.data.gugun_name);
+        this.place = response.data;
+        console.log('place'+this.place);
+      })
+      .catch((error) => {
+        console.dir(error);
+      });
+
+
 
         this.user = this.userInfo;
     }, computed: {
         ...mapState(memberStore, ["isLogin", "isLoginError", "userInfo"]),
     },
-    methods: {
-        // post() {
-        //     axios
-        //         .put(addr + this.place.contentId + '/images', {
-        //             gugunName: String,
-        //             sidoName: String,
-        //             title: String,
-        //     })
-        //     .then((response) => {
-        //         list1 = response.data;
-        //         console.log(list1);
-        //     })
-        //     .catch((error) => {
-        //         console.dir(error);
-        //     });
-        // }
-    }
 
 };
 </script>
 
 <style scoped>
+*{
+    color:black;
+}
 .btn-base-in {
     padding: 30px;
     width: 130px;

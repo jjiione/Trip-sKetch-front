@@ -39,8 +39,11 @@
           <div style="height: 500px; overflow: auto" class="d-block">
             <ul>
               <li v-for="(item, index) in placeList" :key="index">
-                <div @click="gugunMethod(data, $event)"> {{ item.title }}</div>
+                <div @click="dataClick(item, $event)"> {{ item.title }}</div>
               </li>
+              <b-modal v-model="modalShow">
+      <DarkMainSection4Detail  :contentId="currContentId"></DarkMainSection4Detail>
+    </b-modal>
             </ul>
           </div>
         </div>
@@ -110,12 +113,22 @@
 
       </b-tab>
     </b-tabs>
+
+    <div>
+    <b-button v-b-toggle.sidebar-1>Plan List</b-button>
+    <b-sidebar id="sidebar-1" style="width: 400px" title="내가 담은 Place" shadow>
+      <div class="px-3 py-2" style="color:black">
+        {{ placeList }}
+      </div>
+    </b-sidebar>
+  </div>
   </div>
 </template>
 
 <script>
 import DarkMainSection4Search from "./DarkMainSection4Search.vue";
 import axios from "axios";
+import DarkMainSection4Detail from "./DarkMainSection4Detail.vue";
 
 const addr = "http://localhost:80/place/";
 export default {
@@ -129,6 +142,11 @@ export default {
       cat1List: [],
       cat2List: [],
       cat3List: [],
+      planList: [],
+      currContentId : Number,
+      placeDtail : {},
+      modalShow: false,
+      
       currSido: {
         sido_name: '시도',
         sido_code: 0,
@@ -154,8 +172,17 @@ export default {
   },
   components: {
     DarkMainSection4Search,
+    DarkMainSection4Detail,
   },
   methods: {
+    async dataClick(item, event) {
+      this.currContentId = item.contentId;
+
+      this.modalShow = !this.modalShow;
+      console.log(event);
+
+      this.planList.push(item);
+    },
     location(latitude, longitude) {
       this.latitude = latitude;
       this.longitude = longitude;
@@ -224,6 +251,7 @@ export default {
     }
   },
   created() {
+    
     axios
       .get(addr + 'sido/list')
       .then((response) => {

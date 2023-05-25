@@ -3,7 +3,7 @@
     <div id="dark-main-section4-container">
       <div class="d-flex justify-content-center">
         <!-- <div class="col-md-7" style="background-color: blue;"> -->
-        <main-seciton-4-map :latitude="latitude" :longitude="longitude" :placeList="placeList"
+        <main-seciton-4-map @modaltest="modaltest" :modalShow="modalShow" :latitude="latitude" :longitude="longitude" :placeList="placeList"
           class="col-md-7"></main-seciton-4-map>
 
         <!-- </div> -->
@@ -15,6 +15,15 @@
           <dark-main-section-4-sidebar></dark-main-section-4-sidebar>
           <!-- <dark-main-section-4-list :placeList="placeList"></dark-main-section-4-list> -->
         </div>
+
+        <!-- <b-modal v-model="modalShow">
+      <DarkMainSection2Detail :detail="detail" :place="place"></DarkMainSection2Detail>
+    </b-modal> -->
+    <b-modal v-model="modalShow">
+      <!-- <DarkMainSection2Detail :detail="detail" :place="place"></DarkMainSection2Detail> -->
+    <div>hello</div>
+    </b-modal>
+
       </div>
     </div>
   </div>
@@ -39,6 +48,7 @@ export default {
       placeList: [],
       latitude: Number,
       longitude: Number,
+      modalShow: false,
     };
   },
   methods: {
@@ -50,6 +60,9 @@ export default {
     searchLocation(placeList) {
       this.placeList = placeList;
       alert(this.placeList);
+    }, 
+    modaltest(modalShow) {
+      this.modalShow = modalShow;
     }
   },
 };

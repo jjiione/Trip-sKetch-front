@@ -25,6 +25,12 @@
 					<i class="zmdi zmdi-account-box"></i>
 				</div>
 
+				<div class="form-wrapper">
+					<input class="form-control" ref="file" type="file" @change="handleFileUpload()" />
+						
+					<i class="zmdi zmdi-account-box"></i>
+				</div>
+
 
 				<b-form-textarea id="textarea" v-model="reviewContent" placeholder="리뷰를 입력하세요" rows="3"
 					max-rows="6"></b-form-textarea>
@@ -39,6 +45,7 @@
 </template>
 <script>
 import axios from "axios";
+import AWS from 'aws-sdk';
 const url = "http://localhost:80/place/review/regist";
 
 import { mapState, mapGetters, mapActions } from "vuex";
@@ -47,12 +54,19 @@ export default {
 	name: "UserSignup",
 	data() {
 		return {
-			reviewUserId: 'SSAFY',
+			reviewUserId: String,
 			reviewImg: String,
 			reviewTitle: String,
 			reviewContent: "",
 			reviewRate: "",
 			reviewContentId: Number,
+
+			file: null,
+
+			albumBucketName: 'trips-ketch',
+			bucketRegion: 'ap-northeast-2',
+			IdentifyPoolId: 'ap-northeast-2:fdcfec3c-d67d-4491-ac5e-1f9ba8ad1777',
+			uploadImg :String,
 		};
 	},
 	props: {
@@ -83,17 +97,52 @@ export default {
 			if (this.$route.path != "/") this.$router.push({ name: "MainPage" });
 		},
 		async register() {
+			this.uploadFile();
 			console.log(this.reviewContentId, this.reviewContent);
 			// 비동기
 			await axios.post(url, {
 				placeId: this.reviewContentId,
 				userId: this.reviewUserId,
 				content: this.reviewContent,
-				rate: this.reviewRate
+				img : 'https://trips-ketch.s3.ap-northeast-2.amazonaws.com/' + this.file.name,
 			});
 			this.$router.push({ name: "MainPage" });
 
-		}
+		},handleFileUpload() {
+			this.file = this.$refs.file.files[0]
+			console.log("file select");
+		},
+		uploadFile() {
+			AWS.config.update({
+				region: this.bucketRegion,
+				credentials: new AWS.CognitoIdentityCredentials({
+					IdentityPoolId: 'ap-northeast-2:fdcfec3c-d67d-4491-ac5e-1f9ba8ad1777',
+
+				})
+			});
+
+			var s3 = new AWS.S3({
+				apiVersion: "2006-03-01",
+				params: {
+					Bucket: this.albumBucketName
+				}
+			});
+
+			let photoKey = this.file.name;
+
+			s3.upload({
+				Key: photoKey,
+				Body: this.file,
+				ACL: 'public-read'
+			}, (err, data) => {
+				if (err) {
+					console.log(err);
+					return alert("파일 업로드 실패!!");
+				}
+				alert("파일 업로드 성공");
+				console.log(data);
+			});
+		},
 	},
 	created() {
 
@@ -103,7 +152,7 @@ export default {
 		this.reviewUserId = this.userId;
 		this.reviewContentId = this.contentId;
 
-		console.log(this.reviewTitle);
+		console.log(this.reviewTitle, this.contentId);
 
 	},
 

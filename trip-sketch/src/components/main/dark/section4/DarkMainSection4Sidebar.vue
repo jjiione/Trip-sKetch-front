@@ -1,4 +1,4 @@
-<template>
+<!-- <template>
   <div>
     <b-button v-b-toggle.sidebar-1>Plan List</b-button>
     <b-sidebar id="sidebar-1" style="width: 400px" title="내가 담은 Place" shadow>
@@ -17,4 +17,4 @@
 export default {};
 </script>
 
-<style></style>
+<style></style> -->

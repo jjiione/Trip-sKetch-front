@@ -1,5 +1,9 @@
 <template>
-  <div id="map"></div>
+ 
+    <div id="map">
+    
+  </div>
+  
 </template>
 
 <script>
@@ -11,12 +15,15 @@ export default {
       map: null,
       positions: [],
       markers: [],
+      currFlag : Boolean,
+      
     };
   },
   props: {
     latitude: Number,
     longitude: Number,
     placeList: [],
+    modalShow: Boolean,
   },
   watch: {
     latitude() {
@@ -45,7 +52,9 @@ export default {
       this.loadMaker();
     }
   },
-  created() { },
+  created() {
+    this.currFlag = this.modalShow;
+   },
   mounted() {
     // api 스크립트 소스 불러오기 및 지도 출력
     if (window.kakao && window.kakao.maps) {
@@ -103,7 +112,10 @@ export default {
         // 마커에 클릭이벤트를 등록합니다
         kakao.maps.event.addListener(marker, 'click', function () {
           // 마커 위에 인포윈도우를 표시합니다
-          alert("push");
+          // alert("push");
+          // this.currFlag = !this.currFlag;
+          // this.$emit("modaltest", !this.currFlag);
+          console.log(this.currFlag);
         });
         this.markers.push(marker);
         marker.setMap(this.map);

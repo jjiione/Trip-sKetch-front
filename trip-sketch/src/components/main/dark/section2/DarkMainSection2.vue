@@ -54,6 +54,8 @@ export default {
       placeList: [],
       // contentIdList: []
       imgList: [],
+      modalShow: false,
+      
     };
   },
   created() {
